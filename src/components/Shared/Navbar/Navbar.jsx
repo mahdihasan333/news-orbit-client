@@ -4,15 +4,27 @@ import { Tooltip } from "react-tooltip";
 const Navbar = () => {
   const navOptions = (
     <>
-      <li><NavLink>Home</NavLink></li>
-      <li><NavLink>Add Articles</NavLink></li>
-      <li><NavLink>All Articles</NavLink></li>
-      <li><NavLink>Subscription</NavLink></li>
-      <li><NavLink>Dashboard</NavLink></li>
-      <li><NavLink>My Articles</NavLink></li>
-      <li><NavLink>Premium Articles</NavLink></li>
-
-      
+      <li>
+        <NavLink to="/">Home</NavLink>
+      </li>
+      <li>
+        <NavLink to="/AddArticles">Add Articles</NavLink>
+      </li>
+      <li>
+        <NavLink to="/AllArticles">All Articles</NavLink>
+      </li>
+      <li>
+        <NavLink to="/Subscription">Subscription</NavLink>
+      </li>
+      <li>
+        <NavLink to="/Dashboard">Dashboard</NavLink>
+      </li>
+      <li>
+        <NavLink to="/MyArticles">My Articles</NavLink>
+      </li>
+      <li>
+        <NavLink to="/PremiumArticles">Premium Articles</NavLink>
+      </li>
     </>
   );
 
