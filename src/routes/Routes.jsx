@@ -7,9 +7,13 @@ import SignUp from "../pages/SignUp/SignUp";
 import AddArticles from "../pages/AddArticles/AddArticles";
 import AllArticles from "../pages/AllArticles/AllArticles";
 import Subscription from "../pages/Subscription/Subscription";
-import Dashboard from "../pages/Dashboard/Dashboard";
 import MyArticles from "../pages/MyArticles/MyArticles";
 import PremiumArticles from "../pages/PremiumArticles/PremiumArticles";
+import DashboardLayout from "../layouts/DashboardLayout";
+import AdminAllArticles from "../pages/Dashboard/AdminAllArticles/AdminAllArticles";
+import AllUsers from "../pages/Dashboard/AllUsers/Allusers";
+import AddPublisher from "../pages/Dashboard/AddPublisher/AddPublisher";
+import AdminDashboard from "../pages/Dashboard/AdminDashboard/AdminDashboard";
 
 export const router = createBrowserRouter([
   {
@@ -33,10 +37,7 @@ export const router = createBrowserRouter([
         path: "/Subscription",
         element: <Subscription/>
       },
-      {
-        path: "/Dashboard",
-        element: <Dashboard/>
-      },
+      
       {
         path: "/MyArticles",
         element: <MyArticles/>
@@ -49,4 +50,27 @@ export const router = createBrowserRouter([
   },
   { path: "/login", element: <Login /> },
   { path: "/signup", element: <SignUp /> },
+  {
+    path: '/dashboard',
+    element: <DashboardLayout/>,
+    children: [
+      {
+        index: true,
+        element: <AdminDashboard/>
+      },
+      {
+        path: 'AdminArticles',
+        element: <AdminAllArticles/>
+      },
+      {
+        path: 'allUsers',
+        element: <AllUsers/>
+      },
+      {
+        path: 'addPublisher',
+        element: <AddPublisher/>
+      },
+
+    ]
+  }
 ]);

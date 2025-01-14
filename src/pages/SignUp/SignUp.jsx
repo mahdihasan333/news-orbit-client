@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 import { TbFidgetSpinner } from "react-icons/tb";
 
 const SignUp = () => {
-  const { googleSignIn, loading } = useAuth();
- 
+  const { googleSignIn, loading, createUser, updateUserProfile } = useAuth();
 
   const {
     register,
@@ -15,8 +14,12 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      const result = await createUser(data.email, data.password)
+    } catch (error) {
+      console.error("Error creating user:", error.message);
+    }
   };
 
   return (
@@ -49,9 +52,6 @@ const SignUp = () => {
               )}
             </div>
             <div>
-              <label htmlFor="image" className="block mb-2 text-sm">
-                Select Image:
-              </label>
               <input
                 type="file"
                 {...register("photoURL", { required: true })}
