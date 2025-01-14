@@ -2,9 +2,11 @@ import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { TbFidgetSpinner } from "react-icons/tb";
 
 const SignUp = () => {
-  const { googleSignIn } = useAuth();
+  const { googleSignIn, loading } = useAuth();
+ 
 
   const {
     register,
@@ -117,12 +119,11 @@ const SignUp = () => {
               type="submit"
               className="bg-lime-500 w-full rounded-md py-3 text-white"
             >
-              {/* {loading ? (
+              {loading ? (
                 <TbFidgetSpinner className="animate-spin m-auto" />
               ) : (
                 "Continue"
-              )} */}
-              signUP
+              )}
             </button>
           </div>
         </form>

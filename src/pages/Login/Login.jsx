@@ -1,10 +1,12 @@
 import { FcGoogle } from "react-icons/fc";
 import { TbFidgetSpinner } from "react-icons/tb";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const {loading} = useAuth()
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -66,11 +68,11 @@ const Login = () => {
               type="submit"
               className="bg-lime-500 w-full rounded-md py-3 text-white"
             >
-              {/* {loading ? (
+              {loading ? (
                 <TbFidgetSpinner className="animate-spin m-auto" />
               ) : (
                 "Continue"
-              )} */}
+              )}
             </button>
           </div>
         </form>
