@@ -2,10 +2,28 @@ import { TbFidgetSpinner } from "react-icons/tb";
 import useAuth from "../../hooks/useAuth";
 import Select from "react-select";
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+import { shortImageName } from "../../utilities";
+import { imageUpload } from "../../api/utils";
 
 const AddArticles = () => {
   const { loading } = useAuth();
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const [uploadImage, setUploadImage] = useState({
+    image: { name: "Upload Button" },
+  });
+
+  const { data: publisher, isLoading } = useQuery({
+    queryKey: ["publisher"],
+    queryFn: async () => {
+      const { data } = await axios(`${import.meta.env.VITE_API_URL}/publisher`);
+      return data;
+    },
+  });
+
+  if (isLoading) return <LoadingSpinner />;
 
   const options = [
     { value: "chocolate", label: "Chocolate" },
@@ -15,15 +33,17 @@ const AddArticles = () => {
     { value: "blueberry", label: "Blueberry" },
   ];
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const form = e.target;
+    const image = form.image.files[0];
+    const imageUrl = await imageUpload(image);
     const formData = {
       title: e.target.name.value,
       publisher: e.target.category.value,
       tags: selectedOptions.map((option) => option.value), // Multi-selected values
       description: e.target.description.value,
-      price: e.target.price.value,
-      quantity: e.target.quantity.value,
+      imageUrl,
     };
     console.log(formData);
   };
@@ -56,10 +76,11 @@ const AddArticles = () => {
               className="w-full px-4 py-3 border-lime-300 focus:outline-lime-500 rounded-md bg-white"
               name="category"
             >
-              <option value="Indoor">Indoor</option>
-              <option value="Outdoor">Outdoor</option>
-              <option value="Succulent">Succulent</option>
-              <option value="Flowering">Flowering</option>
+              {publisher.map((item) => (
+                <option key={item._id} value={item?.name}>
+                  {item?.name}
+                </option>
+              ))}
             </select>
           </div>
           {/* Multi-Select Tags */}
@@ -95,6 +116,12 @@ const AddArticles = () => {
               <div className="flex flex-col w-max mx-auto text-center">
                 <label>
                   <input
+                    onChange={(e) =>
+                      setUploadImage({
+                        image: e.target.files[0],
+                        url: URL.createObjectURL(e.target.files[0]),
+                      })
+                    }
                     className="text-sm cursor-pointer w-36 hidden"
                     type="file"
                     name="image"
@@ -103,12 +130,18 @@ const AddArticles = () => {
                     hidden
                   />
                   <div className="bg-lime-500 text-white border border-gray-300 rounded font-semibold cursor-pointer p-1 px-3 hover:bg-lime-500">
-                    Image File
+                    {shortImageName(uploadImage?.image)}
                   </div>
                 </label>
               </div>
             </div>
           </div>
+          {uploadImage && uploadImage?.image?.size && (
+            <div className="flex gap-5 items-center">
+              <img className="w-20" src={uploadImage?.url} alt="" />
+              <p>Image Size: {uploadImage?.image?.size} Bytes</p>
+            </div>
+          )}
 
           {/* Submit Button */}
           <button
