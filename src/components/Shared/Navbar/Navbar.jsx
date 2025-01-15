@@ -14,22 +14,22 @@ const Navbar = () => {
         <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <NavLink to="/AddArticles">Add Articles</NavLink>
+        <NavLink to="/addArticles">Add Articles</NavLink>
       </li>
       <li>
-        <NavLink to="/AllArticles">All Articles</NavLink>
+        <NavLink to="/allArticles">All Articles</NavLink>
       </li>
       <li>
-        <NavLink to="/Subscription">Subscription</NavLink>
+        <NavLink to="/subscription">Subscription</NavLink>
       </li>
       <li>
-        <NavLink to="/Dashboard">Dashboard</NavLink>
+        <NavLink to="/dashboard">Dashboard</NavLink>
       </li>
       <li>
-        <NavLink to="/MyArticles">My Articles</NavLink>
+        <NavLink to="/myArticles">My Articles</NavLink>
       </li>
       <li>
-        <NavLink to="/PremiumArticles">Premium Articles</NavLink>
+        <NavLink to="/premiumArticles">Premium Articles</NavLink>
       </li>
     </>
   );

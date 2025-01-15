@@ -11,9 +11,11 @@ import MyArticles from "../pages/MyArticles/MyArticles";
 import PremiumArticles from "../pages/PremiumArticles/PremiumArticles";
 import DashboardLayout from "../layouts/DashboardLayout";
 import AdminAllArticles from "../pages/Dashboard/AdminAllArticles/AdminAllArticles";
-import AllUsers from "../pages/Dashboard/AllUsers/Allusers";
 import AddPublisher from "../pages/Dashboard/AddPublisher/AddPublisher";
 import AdminDashboard from "../pages/Dashboard/AdminDashboard/AdminDashboard";
+import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
+import MyProfile from "../pages/MyProfile/MyProfile";
+import ArticleDetails from "../pages/ArticlesDetails/ArticlesDetails";
 
 export const router = createBrowserRouter([
   {
@@ -26,25 +28,33 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/AddArticles",
+        path: "/addArticles",
         element: <AddArticles/>
       },
       {
-        path: "/AllArticles",
+        path: "/allArticles",
         element: <AllArticles/>
       },
       {
-        path: "/Subscription",
+        path: "/articlesDetails",
+        element: <ArticleDetails/>
+      },
+      {
+        path: "/subscription",
         element: <Subscription/>
       },
       
       {
-        path: "/MyArticles",
+        path: "/myArticles",
         element: <MyArticles/>
       },
       {
-        path: "/PremiumArticles",
+        path: "/premiumArticles",
         element: <PremiumArticles/>
+      },
+      {
+        path: "/myProfile",
+        element: <MyProfile/>
       },
     ],
   },
@@ -59,7 +69,7 @@ export const router = createBrowserRouter([
         element: <AdminDashboard/>
       },
       {
-        path: 'AdminArticles',
+        path: 'adminArticles',
         element: <AdminAllArticles/>
       },
       {

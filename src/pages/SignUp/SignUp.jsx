@@ -3,6 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { TbFidgetSpinner } from "react-icons/tb";
+import { imageUpload } from "../../api/utils";
 
 const SignUp = () => {
   const { googleSignIn, loading, createUser, updateUserProfile } = useAuth();
@@ -15,11 +16,15 @@ const SignUp = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    try {
-      const result = await createUser(data.email, data.password)
-    } catch (error) {
-      console.error("Error creating user:", error.message);
-    }
+
+    const photoURL = await imageUpload(data)
+
+    console.log(data, 'name', photoURL)
+    // try {
+    //   const result = await createUser(data.email, data.password)
+    // } catch (error) {
+    //   console.error("Error creating user:", error.message);
+    // }
   };
 
   return (
