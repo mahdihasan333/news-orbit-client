@@ -19,6 +19,15 @@ const Sidebar = () => {
           </li>
         </ul>
       </div>
+
+      <div className="divider"></div>
+      <div>
+        <ul>
+          <li>
+            <NavLink to="/">Home</NavLink>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 };

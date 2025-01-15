@@ -37,8 +37,4 @@ To run the project locally, follow the steps below:
 - MongoDB (Local or Cloud Database)
 - Firebase (For authentication and database)
 
-### Steps
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/mahdihasan333/newspaper-fullstack.git
