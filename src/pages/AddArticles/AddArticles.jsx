@@ -45,7 +45,7 @@ const AddArticles = () => {
     const formData = {
       title: e.target.name.value,
       publisher: e.target.category.value,
-      tags: selectedOptions.map((option) => option.value), // Multi-selected values
+      tags: selectedOptions.map((option) => option.value),
       description: e.target.description.value,
       imageUrl,
     };
