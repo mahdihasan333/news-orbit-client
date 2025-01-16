@@ -7,6 +7,8 @@ import axios from "axios";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { shortImageName } from "../../utilities";
 import { imageUpload } from "../../api/utils";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const AddArticles = () => {
   const { loading } = useAuth();
@@ -14,6 +16,8 @@ const AddArticles = () => {
   const [uploadImage, setUploadImage] = useState({
     image: { name: "Upload Button" },
   });
+
+  const axiosPublic = useAxiosPublic();
 
   const { data: publisher, isLoading } = useQuery({
     queryKey: ["publisher"],
@@ -46,6 +50,26 @@ const AddArticles = () => {
       imageUrl,
     };
     console.log(formData);
+
+    // sent data to server side
+    try {
+      await axiosPublic.post("/add-articles", formData);
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Articles Posted Successfully!!!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      form.reset();
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: `${error.message}`,
+      });
+    }
   };
 
   return (
