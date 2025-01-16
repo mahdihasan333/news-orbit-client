@@ -1,7 +1,5 @@
-import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
-import { AuthContext } from "../../../providers/AuthProvider";
 import useAuth from "../../../hooks/useAuth";
 
 const Navbar = () => {
@@ -13,10 +11,10 @@ const Navbar = () => {
         <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <NavLink to="/addArticles">Add Articles</NavLink>
+        <NavLink to="/addarticles">Add Articles</NavLink>
       </li>
       <li>
-        <NavLink to="/allArticles">All Articles</NavLink>
+        <NavLink to="/allarticles">All Articles</NavLink>
       </li>
       <li>
         <NavLink to="/subscription">Subscription</NavLink>
@@ -25,10 +23,10 @@ const Navbar = () => {
         <NavLink to="/dashboard">Dashboard</NavLink>
       </li>
       <li>
-        <NavLink to="/myArticles">My Articles</NavLink>
+        <NavLink to="/myarticles">My Articles</NavLink>
       </li>
       <li>
-        <NavLink to="/premiumArticles">Premium Articles</NavLink>
+        <NavLink to="/premiumarticles">Premium Articles</NavLink>
       </li>
     </>
   );

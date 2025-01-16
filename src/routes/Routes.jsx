@@ -17,6 +17,7 @@ import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 import MyProfile from "../pages/MyProfile/MyProfile";
 import ArticleDetails from "../pages/ArticlesDetails/ArticlesDetails";
 import PrivateRoute from "./PrivateRoute";
+import UpdateArticles from "../pages/UpdateArticles/UpdateArticles";
 
 export const router = createBrowserRouter([
   {
@@ -29,15 +30,19 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/addArticles",
-        element: <AddArticles />,
+        path: "/addarticles",
+        element: (
+          <PrivateRoute>
+            <AddArticles />
+          </PrivateRoute>
+        ),
       },
       {
-        path: "/allArticles",
+        path: "/allarticles",
         element: <AllArticles />,
       },
       {
-        path: "/articlesDetails",
+        path: "/articles-details/:id",
         element: (
           <PrivateRoute>
             <ArticleDetails />
@@ -54,7 +59,7 @@ export const router = createBrowserRouter([
       },
 
       {
-        path: "/myArticles",
+        path: "/myarticles",
         element: (
           <PrivateRoute>
             <MyArticles />
@@ -62,7 +67,15 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/premiumArticles",
+        path: "/updatearticles",
+        element: (
+          <PrivateRoute>
+            <UpdateArticles/>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/premiumarticles",
         element: (
           <PrivateRoute>
             <PremiumArticles />
@@ -70,7 +83,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/myProfile",
+        path: "/my-profile",
         element: (
           <PrivateRoute>
             <MyProfile />
@@ -90,15 +103,15 @@ export const router = createBrowserRouter([
         element: <AdminDashboard />,
       },
       {
-        path: "adminArticles",
+        path: "admin-articles",
         element: <AdminAllArticles />,
       },
       {
-        path: "allUsers",
+        path: "all-users",
         element: <AllUsers />,
       },
       {
-        path: "addPublisher",
+        path: "add-publisher",
         element: <AddPublisher />,
       },
     ],

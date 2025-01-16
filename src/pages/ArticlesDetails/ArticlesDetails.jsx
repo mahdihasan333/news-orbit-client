@@ -1,30 +1,48 @@
-const ArticleDetails = () => {
-  
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
+const ArticleDetails = () => {
+  const { id } = useParams();
+
+  const { data: articlesData = {}, isLoading } = useQuery({
+    queryKey: ["articles-details", id],
+    queryFn: async () => {
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_API_URL}/approved/${id}`
+      );
+      return data;
+    },
+  });
+  console.log(articlesData);
 
   return (
     <div className="container mx-auto p-6">
       {/* Title Section */}
-      <h1 className="text-4xl font-bold mb-4">title</h1>
-      
+      <h1 className="text-4xl font-bold mb-4">{articlesData?.title}</h1>
+
       {/* Publisher and Views */}
       <div className="flex items-center gap-4 mb-6 text-sm text-gray-600">
-        <span>Publisher: <strong>publisher</strong></span>
-        <span>Views: <strong>views</strong></span>
+        <span>
+          Publisher: <strong>{articlesData?.publisher}</strong>
+        </span>
+        <span>
+          Views: <strong>views</strong>
+        </span>
       </div>
 
       {/* Article Image */}
       <div className="mb-6">
         <img
-          src='https://ibb.co.com/sHSrswx'
-          alt=''
-          className="w-full max-h-96 object-cover rounded-lg shadow-lg"
+          src={articlesData?.imageUrl}
+          alt="Article Image"
+          className="w-full h-96 object-cover rounded-lg shadow-lg border border-gray-200 hover:shadow-2xl transition-shadow duration-300 ease-in-out"
         />
       </div>
 
       {/* Long Description */}
       <div className="text-gray-800 leading-relaxed">
-        <p>description</p>
+        <p>{articlesData?.description}</p>
       </div>
     </div>
   );

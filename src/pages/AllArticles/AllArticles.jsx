@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import axios from "axios";
 import UserCard from "../../components/UserCard/UserCard";
+import { Link } from "react-router-dom";
 
 const AllArticles = () => {
   const { data: approvedData, isLoading } = useQuery({
@@ -37,31 +38,11 @@ const AllArticles = () => {
 
       {/* Articles List */}
 
-    {
-      approvedData.map(item => <UserCard key={item._id} item={item}/>)
-    }
+      {approvedData.map((item) => (
+        <UserCard key={item._id} item={item} />
+      ))}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        
-
-        <div className="p-4 rounded shadow bg-white border border-gray-200">
-          <img
-            src="https://via.placeholder.com/150"
-            alt="Article Title"
-            className="w-full h-40 object-cover rounded mb-4"
-          />
-          <h2 className="text-xl font-bold mb-2">Article Title</h2>
-          <p className="text-sm text-gray-600 mb-4">
-            Publisher: <strong>Publisher Name</strong>
-          </p>
-          <p className="text-gray-800 mb-4">
-            Short description of the article...
-          </p>
-          <button className="px-4 py-2 rounded bg-blue-500 text-white">
-            Details
-          </button>
-        </div>
-      </div>
+      
     </div>
   );
 };
