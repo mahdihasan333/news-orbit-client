@@ -2,17 +2,38 @@ import { FcGoogle } from "react-icons/fc";
 import { TbFidgetSpinner } from "react-icons/tb";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const {loading} = useAuth()
+  const { googleSignIn, signInUser } = useAuth();
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
+
+    signInUser(email, password).then((result) => {
+      const user = result.user;
+      console.log(user);
+    });
+    navigate("/");
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await googleSignIn();
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: `${error?.message}`,
+      });
+    }
   };
 
   return (
@@ -68,11 +89,7 @@ const Login = () => {
               type="submit"
               className="bg-lime-500 w-full rounded-md py-3 text-white"
             >
-              {loading ? (
-                <TbFidgetSpinner className="animate-spin m-auto" />
-              ) : (
-                "Continue"
-              )}
+              Login
             </button>
           </div>
         </form>
@@ -88,7 +105,10 @@ const Login = () => {
           </p>
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
         </div>
-        <div className="flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer">
+        <div
+          onClick={handleGoogleSignIn}
+          className="flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer"
+        >
           <FcGoogle size={32} />
 
           <p>Continue with Google</p>

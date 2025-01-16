@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -19,6 +20,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const googleProvider = new GoogleAuthProvider();
+  console.log(user)
 
   // create new user
   const createUser = (email, password) => {
@@ -57,6 +59,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      console.log('current user -->', currentUser)
       setLoading(false);
     });
     return () => {

@@ -11,11 +11,12 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 
 const AddArticles = () => {
-  const { loading } = useAuth();
+  const { loading, user} = useAuth();
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [uploadImage, setUploadImage] = useState({
     image: { name: "Upload Button" },
   });
+  console.log(user)
 
   const axiosPublic = useAxiosPublic();
 
@@ -42,6 +43,11 @@ const AddArticles = () => {
     const form = e.target;
     const image = form.image.files[0];
     const imageUrl = await imageUpload(image);
+
+    const userData = {
+
+    }
+
     const formData = {
       title: e.target.name.value,
       publisher: e.target.category.value,

@@ -1,30 +1,68 @@
 import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
-import { TbFidgetSpinner } from "react-icons/tb";
+import { Link, useNavigate } from "react-router-dom";
 import { imageUpload } from "../../api/utils";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
-  const { googleSignIn, loading, createUser, updateUserProfile } = useAuth();
-
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm();
+  const { googleSignIn, createUser, updateUserProfile } = useAuth();
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
+    try {
+      console.log("Form Data:", data);
 
-    const photoURL = await imageUpload(data)
+      const uploadedImageURL = await imageUpload(data.photoURL[0]);
+      console.log("Uploaded Image URL:", uploadedImageURL);
 
-    console.log(data, 'name', photoURL)
-    // try {
-    //   const result = await createUser(data.email, data.password)
-    // } catch (error) {
-    //   console.error("Error creating user:", error.message);
-    // }
+      const result = await createUser(data.email, data.password);
+      const loggedUser = result.user;
+      console.log("Logged User:", loggedUser);
+
+      await updateUserProfile(data.name, uploadedImageURL);
+      console.log("User profile updated");
+
+      reset();
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: `User Created Successfully`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
+      navigate("/");
+    } catch (error) {
+      console.error("Error:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.message,
+      });
+    }
+  };
+
+  console.log("sign up");
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await googleSignIn();
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: `${error?.message}`,
+      });
+    }
   };
 
   return (
@@ -124,11 +162,7 @@ const SignUp = () => {
               type="submit"
               className="bg-lime-500 w-full rounded-md py-3 text-white"
             >
-              {loading ? (
-                <TbFidgetSpinner className="animate-spin m-auto" />
-              ) : (
-                "Continue"
-              )}
+              Sign Up
             </button>
           </div>
         </form>
@@ -140,7 +174,7 @@ const SignUp = () => {
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
         </div>
         <div
-          onClick={googleSignIn}
+          onClick={handleGoogleSignIn}
           className="flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer"
         >
           <FcGoogle size={32} />

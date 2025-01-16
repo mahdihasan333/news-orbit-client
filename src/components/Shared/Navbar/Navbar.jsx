@@ -2,11 +2,10 @@ import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
 import { AuthContext } from "../../../providers/AuthProvider";
+import useAuth from "../../../hooks/useAuth";
 
 const Navbar = () => {
-
-  const {name} = useContext(AuthContext)
-  console.log(name)
+  const { user, logOut } = useAuth();
 
   const navOptions = (
     <>
@@ -67,21 +66,26 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{navOptions}</ul>
       </div>
 
-      {/* <div className="navbar-end">
+      <div className="navbar-end">
         {!user && (
-          <NavLink to="/login">
-            <button className="btn btn-ghost">Login</button>
-          </NavLink>
+          <div>
+            <NavLink to="/login">
+              <button className="btn btn-ghost">Login</button>
+            </NavLink>
+            <NavLink to="/signUp">
+              <button className="btn btn-ghost">Sign Up</button>
+            </NavLink>
+          </div>
         )}
 
         {user && (
           <>
             <div className="flex justify-center items-center gap-2">
-              <button onClick={logoutUser} className="btn">
+              <button onClick={logOut} className="btn">
                 Logout
               </button>
 
-              <div className="dropdown dark:bg-gray-900 dropdown-end z-50">
+              <Link to="/myProfile">
                 <div
                   tabIndex={0}
                   role="button"
@@ -101,30 +105,10 @@ const Navbar = () => {
                     </Tooltip>
                   </div>
                 </div>
-                <ul
-                  tabIndex={0}
-                  className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow dark:bg-gray-900 rounded-box w-52"
-                >
-                  {user && (
-                    <li className="text-black dark:bg-gray-900 dark:text-white">
-                      <Link to="/createAssignments">Create Assignments</Link>
-                    </li>
-                  )}
-                  {user && (
-                    <li className="text-black dark:bg-gray-900 dark:text-white">
-                      <Link to="/attemptAssignments">
-                        My Attempted Assignments
-                      </Link>
-                    </li>
-                  )}
-                </ul>
-              </div>
+              </Link>
             </div>
           </>
         )}
-      </div> */}
-      <div className="navbar-end">
-        <h2>mahdi</h2>
       </div>
     </div>
   );

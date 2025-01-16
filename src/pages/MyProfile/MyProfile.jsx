@@ -1,4 +1,8 @@
+import useAuth from "../../hooks/useAuth";
+
 const MyProfile = () => {
+  const { user } = useAuth();
+
   return (
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-6">My Profile</h2>
@@ -6,13 +10,13 @@ const MyProfile = () => {
         {/* User Information */}
         <div className="flex items-center space-x-6 mb-6">
           <div className="avatar">
-            <div className="w-24 rounded-full">
-              <img src="https://via.placeholder.com/150" alt="User Profile" />
+            <div className="w-14 rounded-full">
+              <img src={user?.photoURL} alt="User Profile" />
             </div>
           </div>
-          <div>
-            <h3 className="text-xl font-semibold">John Doe</h3>
-            <p className="text-gray-600">johndoe@example.com</p>
+          <div className="flex flex-col flex-grow">
+            <h3 className="sm:text-xs md:text-xl font-semibold">{user?.displayName}</h3>
+            <p className="sm:text-xs text-gray-600">{user?.email}</p>
           </div>
         </div>
 
@@ -27,7 +31,7 @@ const MyProfile = () => {
               <input
                 type="text"
                 id="name"
-                defaultValue="John Doe"
+                defaultValue={user?.displayName}
                 className="input input-bordered w-full"
               />
             </div>
@@ -42,6 +46,7 @@ const MyProfile = () => {
                 id="email"
                 defaultValue="johndoe@example.com"
                 className="input input-bordered w-full"
+                disabled
               />
             </div>
 
@@ -57,22 +62,6 @@ const MyProfile = () => {
                 type="file"
                 id="profilePic"
                 className="file-input file-input-bordered w-full"
-              />
-            </div>
-
-            {/* Contact Input */}
-            <div>
-              <label
-                className="block text-sm font-medium mb-2"
-                htmlFor="contact"
-              >
-                Contact Number
-              </label>
-              <input
-                type="text"
-                id="contact"
-                placeholder="Enter your contact number"
-                className="input input-bordered w-full"
               />
             </div>
           </div>

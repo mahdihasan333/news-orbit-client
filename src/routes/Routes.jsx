@@ -16,6 +16,7 @@ import AdminDashboard from "../pages/Dashboard/AdminDashboard/AdminDashboard";
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 import MyProfile from "../pages/MyProfile/MyProfile";
 import ArticleDetails from "../pages/ArticlesDetails/ArticlesDetails";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -29,58 +30,77 @@ export const router = createBrowserRouter([
       },
       {
         path: "/addArticles",
-        element: <AddArticles/>
+        element: <AddArticles />,
       },
       {
         path: "/allArticles",
-        element: <AllArticles/>
+        element: <AllArticles />,
       },
       {
         path: "/articlesDetails",
-        element: <ArticleDetails/>
+        element: (
+          <PrivateRoute>
+            <ArticleDetails />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/subscription",
-        element: <Subscription/>
+        element: (
+          <PrivateRoute>
+            <Subscription />
+          </PrivateRoute>
+        ),
       },
-      
+
       {
         path: "/myArticles",
-        element: <MyArticles/>
+        element: (
+          <PrivateRoute>
+            <MyArticles />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/premiumArticles",
-        element: <PremiumArticles/>
+        element: (
+          <PrivateRoute>
+            <PremiumArticles />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/myProfile",
-        element: <MyProfile/>
+        element: (
+          <PrivateRoute>
+            <MyProfile />
+          </PrivateRoute>
+        ),
       },
     ],
   },
   { path: "/login", element: <Login /> },
   { path: "/signup", element: <SignUp /> },
   {
-    path: '/dashboard',
-    element: <DashboardLayout/>,
+    path: "/dashboard",
+    element: <DashboardLayout />,
     children: [
       {
         index: true,
-        element: <AdminDashboard/>
+        element: <AdminDashboard />,
       },
       {
-        path: 'adminArticles',
-        element: <AdminAllArticles/>
+        path: "adminArticles",
+        element: <AdminAllArticles />,
       },
       {
-        path: 'allUsers',
-        element: <AllUsers/>
+        path: "allUsers",
+        element: <AllUsers />,
       },
       {
-        path: 'addPublisher',
-        element: <AddPublisher/>
+        path: "addPublisher",
+        element: <AddPublisher />,
       },
-
-    ]
-  }
+    ],
+  },
 ]);
