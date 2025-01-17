@@ -7,35 +7,47 @@ import axios from "axios";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { shortImageName } from "../../utilities";
 import { imageUpload } from "../../api/utils";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const AddArticles = () => {
-  const { loading, user} = useAuth();
+  const { loading, user } = useAuth();
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [uploadImage, setUploadImage] = useState({
     image: { name: "Upload Button" },
   });
-  console.log(user)
+  console.log(user);
 
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
 
   const { data: publisher, isLoading } = useQuery({
     queryKey: ["publisher"],
     queryFn: async () => {
-      const { data } = await axios(`${import.meta.env.VITE_API_URL}/publisher`);
-      return data;
+      const res = await axiosSecure.get("/publisher");
+      return res.data;
     },
   });
 
   if (isLoading) return <LoadingSpinner />;
 
   const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-    { value: "mango", label: "Mango" },
-    { value: "blueberry", label: "Blueberry" },
+    { value: "politics", label: "Politics" },
+    { value: "technology", label: "Technology" },
+    { value: "health", label: "Health" },
+    { value: "entertainment", label: "Entertainment" },
+    { value: "sports", label: "Sports" },
+    { value: "business", label: "Business" },
+    { value: "education", label: "Education" },
+    { value: "environment", label: "Environment" },
+    { value: "travel", label: "Travel" },
+    { value: "science", label: "Science" },
+    { value: "lifestyle", label: "Lifestyle" },
+    { value: "crime", label: "Crime" },
+    { value: "fashion", label: "Fashion" },
+    { value: "food", label: "Food" },
+    { value: "economy", label: "Economy" },
+    { value: "startup", label: "Startup" },
+    { value: "automobile", label: "Automobile" },
   ];
 
   const handleSubmit = async (e) => {
@@ -45,8 +57,10 @@ const AddArticles = () => {
     const imageUrl = await imageUpload(image);
 
     const userData = {
-
-    }
+      name: user?.displayName,
+      image: user?.photoURL,
+      email: user?.email,
+    };
 
     const formData = {
       title: e.target.name.value,
@@ -54,12 +68,13 @@ const AddArticles = () => {
       tags: selectedOptions.map((option) => option.value),
       description: e.target.description.value,
       imageUrl,
+      userData,
     };
     console.log(formData);
 
     // sent data to server side
     try {
-      await axiosPublic.post("/add-articles", formData);
+      await axiosSecure.post("/add-articles", formData);
       Swal.fire({
         position: "top-end",
         icon: "success",

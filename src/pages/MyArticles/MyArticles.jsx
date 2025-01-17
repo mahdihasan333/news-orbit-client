@@ -30,7 +30,7 @@ const MyArticles = () => {
               <td>
                 <div className="flex space-x-2">
                   <button className="btn btn-sm btn-primary">Details</button>
-                  <Link to={"/update-articles"}>
+                  <Link to={"/updatearticles"}>
                     <button className="btn btn-sm btn-warning">Update</button>
                   </Link>
                   <button className="btn btn-sm btn-error">Delete</button>

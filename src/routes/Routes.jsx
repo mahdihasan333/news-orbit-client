@@ -83,7 +83,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/my-profile",
+        path: "/myprofile",
         element: (
           <PrivateRoute>
             <MyProfile />
