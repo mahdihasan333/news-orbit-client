@@ -1,9 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
 import AdminAllDataTable from "../../../components/Dashboard/Table/AdminAllDataTable";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const AdminAllArticles = () => {
+  const axiosSecure = useAxiosSecure();
   const {
     data: articles,
     isLoading,
@@ -11,11 +12,10 @@ const AdminAllArticles = () => {
   } = useQuery({
     queryKey: ["articles"],
     queryFn: async () => {
-      const { data } = await axios(`${import.meta.env.VITE_API_URL}/articles`);
-      return data;
+      const res = await axiosSecure.get("/articles");
+      return res.data;
     },
   });
-  console.log(articles);
 
   if (isLoading) return <LoadingSpinner />;
 
@@ -39,9 +39,9 @@ const AdminAllArticles = () => {
         <tbody>
           {articles.map((article) => (
             <AdminAllDataTable
-            key={article._id}
-            article={article}
-            refetch={refetch}
+              key={article._id}
+              article={article}
+              refetch={refetch}
             />
           ))}
         </tbody>

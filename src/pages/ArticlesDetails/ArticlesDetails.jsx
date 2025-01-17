@@ -1,17 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const ArticleDetails = () => {
   const { id } = useParams();
+  const axiosSecure = useAxiosSecure()
 
-  const { data: articlesData = {}, isLoading } = useQuery({
+  const { data: articlesData = {} } = useQuery({
     queryKey: ["articles-details", id],
     queryFn: async () => {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_API_URL}/approved/${id}`
-      );
-      return data;
+      
+
+      const res = await axiosSecure.get(`/approved/${id}`)
+      return res.data;
     },
   });
   console.log(articlesData);

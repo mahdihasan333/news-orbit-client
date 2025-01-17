@@ -9,6 +9,7 @@ import { shortImageName } from "../../utilities";
 import { imageUpload } from "../../api/utils";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const UpdateArticles = () => {
   const { loading, user} = useAuth();
@@ -19,12 +20,14 @@ const UpdateArticles = () => {
   console.log(user)
 
   const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure()
 
   const { data: publisher, isLoading } = useQuery({
     queryKey: ["publisher"],
     queryFn: async () => {
-      const { data } = await axios(`${import.meta.env.VITE_API_URL}/publisher`);
-      return data;
+      // const { data } = await axios(`${import.meta.env.VITE_API_URL}/publisher`);
+      const res = await axiosSecure.get('/publisher')
+      return res.data;
     },
   });
 

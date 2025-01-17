@@ -3,7 +3,6 @@ import useAuth from "../../hooks/useAuth";
 import Select from "react-select";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { shortImageName } from "../../utilities";
 import { imageUpload } from "../../api/utils";

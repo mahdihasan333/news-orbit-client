@@ -2,16 +2,16 @@ import { useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import axios from "axios";
 import UserCard from "../../components/UserCard/UserCard";
-import { Link } from "react-router-dom";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const AllArticles = () => {
+  const axiosPublic = useAxiosPublic()
   const { data: approvedData, isLoading } = useQuery({
     queryKey: ["publisher"],
     queryFn: async () => {
-      const { data } = await axios(
-        `${import.meta.env.VITE_API_URL}/approved-data`
-      );
-      return data;
+      const res = await axiosPublic.get('/approved-data')
+
+      return res.data;
     },
   });
   console.log(approvedData);

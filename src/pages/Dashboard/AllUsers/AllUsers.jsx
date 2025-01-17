@@ -9,7 +9,11 @@ const AllUsers = () => {
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await axiosSecure.get("users");
+      const res = await axiosSecure.get("users", {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("access-token")}`,
+        },
+      });
       return res.data;
     },
   });
@@ -23,7 +27,7 @@ const AllUsers = () => {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: `${user.name} is an Admin Now`,
+          title: `${user.name} is an Admin Now!`,
           showConfirmButton: false,
           timer: 1500,
         });
@@ -42,18 +46,18 @@ const AllUsers = () => {
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
-      // if (result.isConfirmed) {
-      //   axiosSecure.delete(`/users/${user._id}`).then((res) => {
-      //     if (res.data.deletedCount > 0) {
-      //       refetch();
-      //       Swal.fire({
-      //         title: "Deleted!",
-      //         text: "Your file has been deleted.",
-      //         icon: "success",
-      //       });
-      //     }
-      //   });
-      // }
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/users/${user._id}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            refetch();
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          }
+        });
+      }
     });
   };
 
@@ -87,12 +91,16 @@ const AllUsers = () => {
                 <td>{user?.name}</td>
                 <td>{user?.email}</td>
                 <td>
-                  <button
-                    onClick={() => handleMakeAdmin(user)}
-                    className="btn bg-lime-500"
-                  >
-                    <FaUsers className="text-white" />
-                  </button>
+                  {user.role === "admin" ? (
+                    "Admin"
+                  ) : (
+                    <button
+                      onClick={() => handleMakeAdmin(user)}
+                      className="btn bg-lime-500"
+                    >
+                      <FaUsers className="text-white" />
+                    </button>
+                  )}
                 </td>
                 <td>
                   <button
