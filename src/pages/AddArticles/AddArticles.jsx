@@ -68,6 +68,7 @@ const AddArticles = () => {
       description: e.target.description.value,
       imageUrl,
       userData,
+      status: 'Pending',
     };
     console.log(formData);
 

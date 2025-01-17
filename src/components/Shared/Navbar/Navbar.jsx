@@ -14,11 +14,11 @@ const Navbar = () => {
       </li>
       {user && (
         <li>
-          <NavLink to="/addarticles">Add Articles</NavLink>
+          <NavLink to="/addArticles">Add Articles</NavLink>
         </li>
       )}
       <li>
-        <NavLink to="/allarticles">All Articles</NavLink>
+        <NavLink to="/allArticles">All Articles</NavLink>
       </li>
       {user && (
         <li>
@@ -32,11 +32,11 @@ const Navbar = () => {
       )}
       {user && (
         <li>
-          <NavLink to="/myarticles">My Articles</NavLink>
+          <NavLink to="/myArticles">My Articles</NavLink>
         </li>
       )}
       <li>
-        <NavLink to="/premiumarticles">Premium Articles</NavLink>
+        <NavLink to="/premiumArticles">Premium Articles</NavLink>
       </li>
     </>
   );
@@ -93,7 +93,7 @@ const Navbar = () => {
                 Logout
               </button>
 
-              <Link to="/myprofile">
+              <Link to="/myProfile">
                 <div
                   tabIndex={0}
                   role="button"

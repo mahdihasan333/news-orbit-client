@@ -31,7 +31,7 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/addarticles",
+        path: "/addArticles",
         element: (
           <PrivateRoute>
             <AddArticles />
@@ -39,11 +39,11 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/allarticles",
+        path: "/allArticles",
         element: <AllArticles />,
       },
       {
-        path: "/articles-details/:id",
+        path: "/articlesDetails/:id",
         element: (
           <PrivateRoute>
             <ArticleDetails />
@@ -60,7 +60,7 @@ export const router = createBrowserRouter([
       },
 
       {
-        path: "/myarticles",
+        path: "/myArticles",
         element: (
           <PrivateRoute>
             <MyArticles />
@@ -68,7 +68,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/updatearticles",
+        path: "/updateArticles/:id",
         element: (
           <PrivateRoute>
             <UpdateArticles />
@@ -76,7 +76,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/premiumarticles",
+        path: "/premiumArticles",
         element: (
           <PrivateRoute>
             <PremiumArticles />
@@ -84,7 +84,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/myprofile",
+        path: "/myProfile",
         element: (
           <PrivateRoute>
             <MyProfile />
@@ -104,7 +104,7 @@ export const router = createBrowserRouter([
         element: <AdminDashboard />,
       },
       {
-        path: "admin-articles",
+        path: "adminArticles",
         element: (
           <AdminRoute>
             <AdminAllArticles />
@@ -112,7 +112,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "all-users",
+        path: "allUsers",
         element: (
           <AdminRoute>
             <AllUsers />
@@ -120,7 +120,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "add-publisher",
+        path: "addPublisher",
         element: (
           <AdminRoute>
             <AddPublisher />
