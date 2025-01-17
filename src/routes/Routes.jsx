@@ -18,6 +18,7 @@ import MyProfile from "../pages/MyProfile/MyProfile";
 import ArticleDetails from "../pages/ArticlesDetails/ArticlesDetails";
 import PrivateRoute from "./PrivateRoute";
 import UpdateArticles from "../pages/UpdateArticles/UpdateArticles";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
   {
@@ -70,7 +71,7 @@ export const router = createBrowserRouter([
         path: "/updatearticles",
         element: (
           <PrivateRoute>
-            <UpdateArticles/>
+            <UpdateArticles />
           </PrivateRoute>
         ),
       },
@@ -104,15 +105,27 @@ export const router = createBrowserRouter([
       },
       {
         path: "admin-articles",
-        element: <AdminAllArticles />,
+        element: (
+          <AdminRoute>
+            <AdminAllArticles />
+          </AdminRoute>
+        ),
       },
       {
         path: "all-users",
-        element: <AllUsers />,
+        element: (
+          <AdminRoute>
+            <AllUsers />
+          </AdminRoute>
+        ),
       },
       {
         path: "add-publisher",
-        element: <AddPublisher />,
+        element: (
+          <AdminRoute>
+            <AddPublisher />
+          </AdminRoute>
+        ),
       },
     ],
   },

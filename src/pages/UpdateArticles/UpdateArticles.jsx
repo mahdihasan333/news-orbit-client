@@ -19,7 +19,7 @@ const UpdateArticles = () => {
   });
   console.log(user)
 
-  const axiosPublic = useAxiosPublic();
+  const axiosPublic = useAxiosPublic();k
   const axiosSecure = useAxiosSecure()
 
   const { data: publisher, isLoading } = useQuery({

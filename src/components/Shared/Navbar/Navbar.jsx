@@ -1,9 +1,11 @@
 import { Link, NavLink } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
 import useAuth from "../../../hooks/useAuth";
+import useAdmin from "../../../hooks/useAdmin";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
+  const [isAdmin] = useAdmin();
 
   const navOptions = (
     <>
@@ -23,9 +25,11 @@ const Navbar = () => {
           <NavLink to="/subscription">Subscription</NavLink>
         </li>
       )}
-      <li>
-        <NavLink to="/dashboard">Dashboard</NavLink>
-      </li>
+      {isAdmin && (
+        <li>
+          <NavLink to="/dashboard">Dashboard</NavLink>
+        </li>
+      )}
       {user && (
         <li>
           <NavLink to="/myarticles">My Articles</NavLink>
