@@ -5,7 +5,8 @@ const PremiumArticlesPage = () => {
   return (
     <>
       <Helmet>
-        <title>NewsOrbit || Home</title>
+        <title>NewsOrbit || Premium Articles</title>
+        <link rel="icon" type="image/png" href="/star-icon.png" />
       </Helmet>
 
       <section className="bg-gray-100 py-10">

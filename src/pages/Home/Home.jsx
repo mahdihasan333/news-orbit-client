@@ -7,6 +7,7 @@ const Home = () => {
         <div>
             <Helmet>
                 <title>NewsOrbit || Home</title>
+                <link rel="icon" type="image/png" href="/newspaper-icon.png" />
             </Helmet>
             <FeaturedSection/>
             <Testimonials/>

@@ -7,6 +7,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 const AdminAllDataTable = ({ article, refetch }) => {
   console.log(article);
   const axiosSecure = useAxiosSecure();
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     _id,
@@ -27,6 +28,7 @@ const AdminAllDataTable = ({ article, refetch }) => {
     description,
     imageUrl,
     userData,
+    
   };
   console.log(articleData);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -37,6 +39,7 @@ const AdminAllDataTable = ({ article, refetch }) => {
 
   // handleApprovedData post to server side
   const handleApprovedData = async () => {
+    setIsLoading(true);
     try {
       await axiosSecure.post("/admin-approved", articleData);
       Swal.fire({
@@ -136,26 +139,34 @@ const AdminAllDataTable = ({ article, refetch }) => {
         <td className="py-3 px-2 flex space-x-2">
           <button
             onClick={handleApprovedData}
-            className="bg-green-500 text-white py-1 px-4 rounded hover:bg-green-600"
+            disabled={isLoading}
+            className={`bg-green-500 text-white py-1 px-4 rounded hover:bg-green-600 btn ${
+              isLoading ? "btn-disabled" : ""
+            }`}
           >
-            Approve
+            {isLoading ? "Processing..." : "Approve"}
           </button>
           <button
+            disabled={isLoading}
             onClick={() => {
               setIsModalOpen(true);
             }}
             className="bg-red-500 text-white py-1 px-4 rounded hover:bg-red-600"
           >
-            Decline
+            {isLoading ? "Processing..." : "Decline"}
           </button>
           <button
+            disabled={isLoading}
             onClick={() => handleDeleteUser(_id)}
             className="bg-gray-500 text-white py-1 px-4 rounded hover:bg-gray-600"
           >
-            Delete
+            {isLoading ? "Processing..." : "Delete"}
           </button>
-          <button className="bg-blue-500 text-white py-1 px-4 rounded hover:bg-blue-600">
-            Make Premium
+          <button
+            disabled={isLoading}
+            className="bg-blue-500 text-white py-1 px-4 rounded hover:bg-blue-600"
+          >
+            {isLoading ? "Processing..." : "Make Premium"}
           </button>
         </td>
       </tr>

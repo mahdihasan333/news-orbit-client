@@ -19,6 +19,7 @@ import ArticleDetails from "../pages/ArticlesDetails/ArticlesDetails";
 import PrivateRoute from "./PrivateRoute";
 import UpdateArticles from "../pages/UpdateArticles/UpdateArticles";
 import AdminRoute from "./AdminRoute";
+import UsersApprovedDetails from "../pages/usersApprovedDetails/usersApprovedDetails";
 
 export const router = createBrowserRouter([
   {
@@ -49,6 +50,12 @@ export const router = createBrowserRouter([
             <ArticleDetails />
           </PrivateRoute>
         ),
+      },
+      {
+        path: '/userApprovedDetails/:id',
+        element: <PrivateRoute>
+          <UsersApprovedDetails/>
+        </PrivateRoute>
       },
       {
         path: "/subscription",
