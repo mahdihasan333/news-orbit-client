@@ -20,6 +20,7 @@ import PrivateRoute from "./PrivateRoute";
 import UpdateArticles from "../pages/UpdateArticles/UpdateArticles";
 import AdminRoute from "./AdminRoute";
 import UsersApprovedDetails from "../pages/usersApprovedDetails/usersApprovedDetails";
+import PremiumArticlesDetails from "../pages/PremiumArticlesDetails/PremiumArticlesDetails";
 
 export const router = createBrowserRouter([
   {
@@ -52,10 +53,20 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: '/userApprovedDetails/:id',
-        element: <PrivateRoute>
-          <UsersApprovedDetails/>
-        </PrivateRoute>
+        path: "/premium/:id",
+        element: (
+          <PrivateRoute>
+            <PremiumArticlesDetails />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/userApprovedDetails/:id",
+        element: (
+          <PrivateRoute>
+            <UsersApprovedDetails />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/subscription",

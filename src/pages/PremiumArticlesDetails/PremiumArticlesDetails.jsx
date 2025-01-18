@@ -1,9 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
-const ArticleDetails = () => {
-  const { id } = useParams();
+const PremiumArticlesDetails = () => {
+
+    const { id } = useParams();
   const axiosSecure = useAxiosSecure()
 
   const { data: articlesData = {} } = useQuery({
@@ -11,7 +12,7 @@ const ArticleDetails = () => {
     queryFn: async () => {
       
 
-      const res = await axiosSecure.get(`/approved/${id}`)
+      const res = await axiosSecure.get(`/premium/${id}`)
       return res.data;
     },
   });
@@ -49,4 +50,4 @@ const ArticleDetails = () => {
   );
 };
 
-export default ArticleDetails;
+export default PremiumArticlesDetails;

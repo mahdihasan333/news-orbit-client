@@ -15,7 +15,6 @@ const AddArticles = () => {
   const [uploadImage, setUploadImage] = useState({
     image: { name: "Upload Button" },
   });
-  console.log(user);
 
   const axiosSecure = useAxiosSecure();
 

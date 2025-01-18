@@ -28,7 +28,6 @@ const AdminAllDataTable = ({ article, refetch }) => {
     description,
     imageUrl,
     userData,
-    
   };
   console.log(articleData);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -46,6 +45,28 @@ const AdminAllDataTable = ({ article, refetch }) => {
         position: "top-end",
         icon: "success",
         title: "Articles Approved Successfully!!!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      refetch();
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: `${error.message}`,
+      });
+    }
+  };
+
+  // premium collection
+  const handlePremium = async () => {
+    setIsLoading(true);
+    try {
+      await axiosSecure.post("/premium", articleData);
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Articles Premium Successfully!!!",
         showConfirmButton: false,
         timer: 1500,
       });
@@ -163,6 +184,7 @@ const AdminAllDataTable = ({ article, refetch }) => {
             {isLoading ? "Processing..." : "Delete"}
           </button>
           <button
+            onClick={handlePremium}
             disabled={isLoading}
             className="bg-blue-500 text-white py-1 px-4 rounded hover:bg-blue-600"
           >
