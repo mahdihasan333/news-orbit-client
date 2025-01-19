@@ -4,8 +4,8 @@ A comprehensive news aggregation platform built with React, Firebase, Node, Expr
 
 ## Admin Username and Password
 
-- **Admin Username**: admin@example.com
-- **Admin Password**: admin123
+- **Admin Username**: admincheck@gmail.com
+- **Admin Password**: 1sS@d3A
 
 ## Live Site URL
 
