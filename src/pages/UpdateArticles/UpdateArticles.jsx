@@ -9,9 +9,11 @@ import { imageUpload } from "../../api/utils";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useParams } from "react-router-dom";
 
 const UpdateArticles = () => {
-  const { loading, user } = useAuth();
+  const { user } = useAuth();
+  const { id } = useParams();
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [uploadImage, setUploadImage] = useState({
     image: { name: "Upload Button" },
@@ -19,8 +21,18 @@ const UpdateArticles = () => {
   console.log(user);
 
   const axiosPublic = useAxiosPublic();
- 
+
   const axiosSecure = useAxiosSecure();
+
+  const { data: articles = [] } = useQuery({
+    queryKey: ["articles"],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/userapproved/${id}`);
+      return res.data;
+    },
+  });
+  console.log(articles, "my name", articles[0]);
+  console.log("article id");
 
   const { data: publisher, isLoading } = useQuery({
     queryKey: ["publisher"],
@@ -75,11 +87,11 @@ const UpdateArticles = () => {
     console.log(formData);
     // sent data to server side
     try {
-      await axiosPublic.post("/add-articles", formData);
+      await axiosPublic.patch(`/update/${id}`, formData);
       Swal.fire({
         position: "top-end",
         icon: "success",
-        title: "Articles Posted Successfully!!!",
+        title: "Articles updated Successfully!!!",
         showConfirmButton: false,
         timer: 1500,
       });
@@ -108,7 +120,7 @@ const UpdateArticles = () => {
               name="name"
               id="articleTitle"
               type="text"
-              placeholder="Article Title"
+              defaultValue={articles?.title}
               required
             />
           </div>
@@ -121,6 +133,7 @@ const UpdateArticles = () => {
               required
               className="w-full px-4 py-3 border-lime-300 focus:outline-lime-500 rounded-md bg-white"
               name="category"
+              defaultValue={articles?.publisher}
             >
               {publisher.map((item) => (
                 <option key={item._id} value={item?.name}>
@@ -142,6 +155,7 @@ const UpdateArticles = () => {
               placeholder="Select tags..."
               className="react-select-container"
               classNamePrefix="react-select"
+              defaultInputValue={articles?.tags}
             />
           </div>
           {/* Description */}
@@ -151,9 +165,9 @@ const UpdateArticles = () => {
             </label>
             <textarea
               id="description"
-              placeholder="Write description here..."
               className="block rounded-md focus:lime-300 w-full h-32 px-4 py-3 text-gray-800 border border-lime-300 bg-white focus:outline-lime-500"
               name="description"
+              defaultValue={articles.description}
             ></textarea>
           </div>
           {/* Image */}
@@ -194,11 +208,7 @@ const UpdateArticles = () => {
             type="submit"
             className="w-full p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-lime-500"
           >
-            {loading ? (
-              <TbFidgetSpinner className="animate-spin m-auto" />
-            ) : (
-              "Submit"
-            )}
+            Update
           </button>
         </div>
       </form>

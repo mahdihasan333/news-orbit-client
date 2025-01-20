@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const PremiumArticlesCard = ({premium}) => {
   return (
-    <div className="p-4 rounded shadow bg-white border border-gray-200">
+    <div className="p-4 rounded shadow bg-amber-200 border-2 border-amber-950">
       <img
         src={premium?.imageUrl}
         alt="Article Title"

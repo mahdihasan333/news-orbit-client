@@ -9,8 +9,24 @@ import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
 import Slide from "../../Slide/Slide";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
+import LoadingSpinner from "../../LoadingSpinner/LoadingSpinner";
 
 const Banner = () => {
+  const axiosPublic = useAxiosPublic();
+
+  const { data: sliderData = [], isLoading } = useQuery({
+    queryKey: ["slider"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/slider`);
+      return res.data;
+    },
+  });
+  if(isLoading) return <LoadingSpinner/>
+
+  console.log( 'slider', sliderData);
+
   return (
     <div className="container px-6 py-10 mx-auto">
       <Swiper
@@ -28,27 +44,30 @@ const Banner = () => {
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"
       >
-        <SwiperSlide>
-          <Slide  text="Learn Together, Succeed Together!" />
+        {sliderData.map((slider) => (
+          <SwiperSlide key={slider._id}>
+            <Slide image={slider?.imageUrl} text={slider?.description} />
+          </SwiperSlide>
+        ))}
+
+        {/* <SwiperSlide>
+          <Slide text="1" />
         </SwiperSlide>
         <SwiperSlide>
-          <Slide  text="Your Gateway to Collaborative Success" />
+          <Slide text="2" />
         </SwiperSlide>
         <SwiperSlide>
-          <Slide
-            
-            text="Join Hands, Share Knowledge, Excel Together"
-          />
+          <Slide text="" />
         </SwiperSlide>
         <SwiperSlide>
-          <Slide  text="Share Ideas, Solve Problems, Succeed" />
+          <Slide text="" />
         </SwiperSlide>
         <SwiperSlide>
-          <Slide  text="Share Ideas, Solve Problems, Succeed" />
+          <Slide text="" />
         </SwiperSlide>
         <SwiperSlide>
-          <Slide  text="Share Ideas, Solve Problems, Succeed" />
-        </SwiperSlide>
+          <Slide text="" />
+        </SwiperSlide> */}
       </Swiper>
     </div>
   );

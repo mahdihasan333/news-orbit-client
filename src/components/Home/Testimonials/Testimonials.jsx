@@ -7,27 +7,45 @@ const Testimonials = () => {
           Hear from our valued readers about their experience.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[...Array(3)].map((_, index) => (
-            <div key={index} className="bg-white rounded shadow p-6">
-              <p className="text-gray-600 italic mb-4">
-                "This newspaper keeps me updated with unbiased and accurate news
-                every day. Highly recommend!"
-              </p>
-              <div className="flex items-center">
-                <img
-                  src={`https://via.placeholder.com/50?text=User+${index + 1}`}
-                  alt={`User ${index + 1}`}
-                  className="w-12 h-12 rounded-full mr-4"
-                />
-                <div>
-                  <h3 className="text-lg font-semibold">
-                    User Name {index + 1}
-                  </h3>
-                  <p className="text-sm text-gray-500">Regular Reader</p>
-                </div>
+          <div className="bg-white rounded shadow p-6">
+            <p className="text-gray-600 italic mb-4">
+              I rely on this service for daily updates because of its commitment
+              to providing factual, objective news. A must-follow for anyone who
+              values accuracy!
+            </p>
+            <div className="flex items-center">
+              <div>
+                <h3 className="text-lg font-semibold">Mahdi Hassan</h3>
+                <p className="text-sm text-gray-500">Regular Reader</p>
               </div>
             </div>
-          ))}
+          </div>
+          <div className="bg-white rounded shadow p-6">
+            <p className="text-gray-600 italic mb-4">
+              Every day, I find myself turning to this platform for
+              comprehensive, accurate, and balanced news. It’s a go-to source I
+              can depend on for trustworthy information!
+            </p>
+            <div className="flex items-center">
+              <div>
+                <h3 className="text-lg font-semibold">Kamrul Hassan</h3>
+                <p className="text-sm text-gray-500">Regular Reader</p>
+              </div>
+            </div>
+          </div>
+          <div className="bg-white rounded shadow p-6">
+            <p className="text-gray-600 italic mb-4">
+              This website offers a wealth of knowledge and keeps me informed
+              with reliable, well-researched articles. I trust it every time for
+              staying updated!
+            </p>
+            <div className="flex items-center">
+              <div>
+                <h3 className="text-lg font-semibold">Saiful Islam</h3>
+                <p className="text-sm text-gray-500">Regular Reader</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

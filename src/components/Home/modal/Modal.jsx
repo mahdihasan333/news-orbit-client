@@ -28,7 +28,7 @@ const Modal = () => {
     <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
       <div className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white p-12 rounded-2xl shadow-2xl max-w-2xl w-full relative">
         <button
-          className="absolute top-4 right-4 bg-white text-red-500 font-bold py-2 px-4 rounded-full hover:bg-gray-200"
+          className="absolute top-4 text-3xl right-4 bg-white text-red-500 font-bold py-2 px-4 rounded-full hover:bg-gray-200"
           onClick={handleClose}
         >
           ×

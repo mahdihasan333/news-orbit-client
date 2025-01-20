@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 const CheckoutForm = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [clientSecret, setClientSecret] = useState("");
   const [transactionId, setTransactionId] = useState("");
   const [subscriptionPeriod, setSubscriptionPeriod] = useState("1");
@@ -89,15 +89,30 @@ const CheckoutForm = () => {
 
         const res = await axiosSecure.post("/payments", payment);
         console.log("payment save", res.data);
-        if(res.data?.paymentResult?.insertedId) {
+        if (res.data?.paymentResult?.insertedId) {
           Swal.fire({
             position: "top-end",
             icon: "success",
-            title: "Thank you for purchase Premium users",
+            title: `Thank you ${user.displayName} for purchase Premium users`,
             showConfirmButton: false,
             timer: 1500,
           });
-          navigate('/premiumArticles')
+
+          // user premium
+          axiosSecure.patch(`/users/premium/${user?.email}`).then((res) => {
+            console.log(res.data);
+            // jwt token
+            const userInfo = { email: user?.email };
+            axiosSecure.post("/premiumJwt", userInfo).then((res) => {
+              if (res.data.token) {
+                localStorage.setItem("access-premium-token", res.data.token);
+              } else {
+                localStorage.removeItem("access-premium-token");
+              }
+            });
+          });
+
+          navigate("/premiumArticles");
         }
       }
     }
