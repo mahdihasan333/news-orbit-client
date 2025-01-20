@@ -46,7 +46,7 @@ const Banner = () => {
       >
         {sliderData.map((slider) => (
           <SwiperSlide key={slider._id}>
-            <Slide image={slider?.imageUrl} text={slider?.description} />
+            <Slide image={slider?.imageUrl} text={slider?.title} />
           </SwiperSlide>
         ))}
 
