@@ -1,17 +1,15 @@
-import { FcGoogle } from "react-icons/fc";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
-import Swal from "sweetalert2";
 import SocialLogin from "../../components/SocialLogin/SocialLogin";
 import { Helmet } from "react-helmet-async";
 
 const Login = () => {
+  const { signInUser, user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
   const from = location.state?.from?.pathname || "/";
-
-  const { signInUser } = useAuth();
+  if (user) return <Navigate to={from} replace={true} />;
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -29,8 +27,8 @@ const Login = () => {
   return (
     <>
       <Helmet>
-        <title>NewsOrbit || Home</title>
-        <link rel="icon" type="image/png" href="/login.jpg" /> 
+        <title>NewsOrbit || Login</title>
+        <link rel="icon" type="image/png" href="/login.jpg" />
       </Helmet>
 
       <div className="flex justify-center items-center min-h-screen bg-white">

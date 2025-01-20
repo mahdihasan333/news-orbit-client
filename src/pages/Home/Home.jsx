@@ -6,6 +6,7 @@ import Banner from "../../components/Home/Banner/Banner";
 import Publisher from "../../components/Home/Publisher/Publisher";
 import Plan from "../../components/Home/Plan/Plan";
 import Statistic from "../../components/Home/Statistic/Statistic";
+import Modal from "../../components/Home/modal/Modal";
 
 const Home = () => {
     return (
@@ -14,6 +15,7 @@ const Home = () => {
                 <title>NewsOrbit || Home</title>
                 <link rel="icon" type="image/png" href="/newspaper-icon.png" />
             </Helmet>
+            <Modal/>
             <Banner/>
             <Publisher/>
             <Statistic/>
@@ -21,6 +23,7 @@ const Home = () => {
             <FeaturedSection/>
             <Testimonials/>
             <Questions/>
+
         </div>
     );
 };

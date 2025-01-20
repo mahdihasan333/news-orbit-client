@@ -12,6 +12,3 @@ export const imageUpload = async (imageData) => {
 };
 
 
-// export const saveUser = async user => {
-//   await axios.post(`${import.meta.env.VITE_API_URL}/user`)
-// }

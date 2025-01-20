@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
 
-  const { data: users = [], refetch } = useQuery({
+  const { data: usersData = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
       const res = await axiosSecure.get("users");
@@ -60,7 +60,7 @@ const AllUsers = () => {
   return (
     <>
       <div className="overflow-x-auto w-full p-6">
-        <h2 className="text-2xl font-bold mb-6">All Users: {users.length}</h2>
+        <h2 className="text-2xl font-bold mb-6">All Users: {usersData.length}</h2>
         <table className="table w-full">
           {/* Table Header */}
           <thead>
@@ -74,7 +74,7 @@ const AllUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user, index) => (
+            {usersData.map((user, index) => (
               <tr key={user._id}>
                 <td>{index + 1}</td>
                 <td>

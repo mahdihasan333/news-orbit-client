@@ -1,11 +1,16 @@
 import axios from "axios";
 
 const axiosPublic = axios.create({
-    baseURL: 'http://localhost:5000'
-})
+  baseURL: "https://news-orbit-server.vercel.app",
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+  },
+  withCredentials: true,
+});
 
 const useAxiosPublic = () => {
-    return axiosPublic
-}
+  return axiosPublic;
+};
 
 export default useAxiosPublic;

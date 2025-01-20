@@ -133,9 +133,9 @@ export const router = createBrowserRouter([
       {
         path: "allUsers",
         element: (
-          <AdminRoute>
+          // <AdminRoute>
             <AllUsers />
-          </AdminRoute>
+          // </AdminRoute>
         ),
       },
       {

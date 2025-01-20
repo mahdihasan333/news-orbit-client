@@ -11,21 +11,21 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const UpdateArticles = () => {
-  const { loading, user} = useAuth();
+  const { loading, user } = useAuth();
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [uploadImage, setUploadImage] = useState({
     image: { name: "Upload Button" },
   });
-  console.log(user)
+  console.log(user);
 
-  const axiosPublic = useAxiosPublic();k
-  const axiosSecure = useAxiosSecure()
+  const axiosPublic = useAxiosPublic();
+ 
+  const axiosSecure = useAxiosSecure();
 
   const { data: publisher, isLoading } = useQuery({
     queryKey: ["publisher"],
     queryFn: async () => {
-      // const { data } = await axios(`${import.meta.env.VITE_API_URL}/publisher`);
-      const res = await axiosSecure.get('/publisher')
+      const res = await axiosSecure.get("/publisher");
       return res.data;
     },
   });
