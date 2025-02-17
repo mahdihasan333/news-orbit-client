@@ -5,6 +5,7 @@ import PublisherCard from "../PublisherCard/PublisherCard";
 
 const Publisher = () => {
   const axiosPublic = useAxiosPublic();
+  // const axio
   const { data: publisherData, isLoading } = useQuery({
     queryKey: ["publisher"],
     queryFn: async () => {
@@ -12,7 +13,7 @@ const Publisher = () => {
       return res.data;
     },
   });
-  console.log("publisher data", publisherData);
+  
 
   if (isLoading) return <LoadingSpinner />;
 

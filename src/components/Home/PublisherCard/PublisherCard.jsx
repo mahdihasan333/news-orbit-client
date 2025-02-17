@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 
 const PublisherCard = ({ publisher }) => {
-  console.log(publisher);
+ 
   return (
     <div className="bg-white shadow-lg rounded-lg overflow-hidden hover:scale-105 transform transition-all duration-300">
       <img

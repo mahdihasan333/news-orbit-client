@@ -41,7 +41,7 @@ const AllArticles = () => {
       return res.data;
     },
   });
-  console.log("publisher data", publisherData);
+  
 
   // if (isLoading) return <LoadingSpinner />;
 
@@ -49,7 +49,7 @@ const AllArticles = () => {
     setFilter("");
     setSearch("");
   };
-  console.log(filter, search);
+  
 
   return (
     <>

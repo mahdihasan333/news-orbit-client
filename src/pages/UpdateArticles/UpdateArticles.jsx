@@ -18,7 +18,7 @@ const UpdateArticles = () => {
   const [uploadImage, setUploadImage] = useState({
     image: { name: "Upload Button" },
   });
-  console.log(user);
+  
 
   const axiosPublic = useAxiosPublic();
 
@@ -31,8 +31,7 @@ const UpdateArticles = () => {
       return res.data;
     },
   });
-  console.log(articles, "my name", articles[0]);
-  console.log("article id");
+  
 
   const { data: publisher, isLoading } = useQuery({
     queryKey: ["publisher"],
@@ -84,7 +83,7 @@ const UpdateArticles = () => {
       imageUrl,
       userData,
     };
-    console.log(formData);
+    
     // sent data to server side
     try {
       await axiosPublic.patch(`/update/${id}`, formData);

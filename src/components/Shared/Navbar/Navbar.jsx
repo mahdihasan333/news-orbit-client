@@ -2,8 +2,12 @@ import { Link, NavLink } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
 import useAuth from "../../../hooks/useAuth";
 import useAdmin from "../../../hooks/useAdmin";
+import { useContext } from "react";
+import { ThemeContext } from "../../../providers/ThemeProvider";
+
 
 const Navbar = () => {
+  const { toggleTheme, isDarkMode } = useContext(ThemeContext);
   const { user, logOut } = useAuth();
   const [isAdmin] = useAdmin();
 

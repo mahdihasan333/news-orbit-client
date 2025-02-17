@@ -27,7 +27,7 @@ const AddPublisher = () => {
       name,
       imageUrl,
     };
-    console.log(publisherData);
+    
 
     // sent data to server side
     try {

@@ -16,7 +16,7 @@ const PremiumArticlesPage = () => {
     },
   });
 
-  console.log(premiumData);
+  
   if (isLoading) return <LoadingSpinner />;
 
   return (

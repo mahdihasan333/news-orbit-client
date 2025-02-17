@@ -20,7 +20,7 @@ const SignUp = () => {
 
   const onSubmit = async (data) => {
     const uploadedImageURL = await imageUpload(data.photoURL[0]);
-    console.log("Uploaded Image URL:", uploadedImageURL);
+    
 
     await createUser(data.email, data.password).then((result) => {
       const loggedUser = result.user;
@@ -35,7 +35,7 @@ const SignUp = () => {
           };
           axiosPublic.post("/users", userInfo).then((res) => {
             if (res.data.insertedId) {
-              console.log("user added to the database");
+              
               reset();
               Swal.fire({
                 position: "top-end",

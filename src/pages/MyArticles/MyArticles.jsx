@@ -7,7 +7,7 @@ import MyArticlesTable from "../../components/Dashboard/Table/MyArticlesTable";
 const MyArticles = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
-  console.log(user.email)
+  
 
   const { data: articles = [], refetch } = useQuery({
     queryKey: ["articles"],
@@ -17,7 +17,7 @@ const MyArticles = () => {
     },
   });
 
-  console.log(articles);
+  
 
   return (
     <>

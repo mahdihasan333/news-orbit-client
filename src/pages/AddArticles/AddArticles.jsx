@@ -70,7 +70,7 @@ const AddArticles = () => {
       status: "Pending",
       premium: "No"
     };
-    console.log(formData);
+    
 
     // sent data to server side
     try {

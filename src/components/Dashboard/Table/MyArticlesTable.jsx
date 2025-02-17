@@ -5,7 +5,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const MyArticlesTable = ({ article, index, refetch }) => {
   const { _id, title, status, premium } = article || {};
-  console.log(_id);
+ 
 
   const axiosSecure = useAxiosSecure();
 

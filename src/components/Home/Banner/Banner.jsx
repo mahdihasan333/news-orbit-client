@@ -25,7 +25,7 @@ const Banner = () => {
   });
   if(isLoading) return <LoadingSpinner/>
 
-  console.log( 'slider', sliderData);
+  
 
   return (
     <div className="container px-6 py-10 mx-auto">

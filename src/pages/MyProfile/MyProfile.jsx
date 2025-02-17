@@ -26,7 +26,7 @@ const MyProfile = () => {
       imageUrl,
       email: user.email,
     };
-    console.log(updateUserData);
+    
 
     // sent data to server side
     try {

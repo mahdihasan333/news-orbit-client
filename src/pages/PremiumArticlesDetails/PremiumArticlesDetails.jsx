@@ -16,7 +16,7 @@ const PremiumArticlesDetails = () => {
       return res.data;
     },
   });
-  console.log(articlesData);
+  
 
   return (
     <div className="container mx-auto p-6">

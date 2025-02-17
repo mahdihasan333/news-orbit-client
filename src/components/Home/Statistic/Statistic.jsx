@@ -1,12 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import CountUp from "react-countup";
+import useAuth from "../../../hooks/useAuth";
 
 const Statistic = () => {
   const axiosSecure = useAxiosSecure();
-
+  const {user} = useAuth()
   const { data: statData = [] } = useQuery({
     queryKey: ["statData"],
+    enabled: !!user,
     queryFn: async () => {
       const res = await axiosSecure.get(`/admin-stat`);
       return res.data.totalUser;
@@ -14,8 +16,7 @@ const Statistic = () => {
   });
   
 
-  console.log(statData.length);
-  console.log( "stat", statData );
+  
 
   return (
     <div className="p-6">

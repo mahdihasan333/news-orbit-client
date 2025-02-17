@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const AdminAllDataTable = ({ article, refetch }) => {
-  console.log(article);
+  
   const axiosSecure = useAxiosSecure();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -29,7 +29,7 @@ const AdminAllDataTable = ({ article, refetch }) => {
     imageUrl,
     userData,
   };
-  console.log(articleData);
+ 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const getFormattedDate = () => {
