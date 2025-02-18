@@ -1,6 +1,6 @@
 const Questions = () => {
   return (
-    <div className="py-16 text-black">
+    <div className="text-black w-11/12 mx-auto">
       <div className="text-center space-y-5 mb-9">
         <h1 className="text-4xl font-bold">Frequently Asked Questions (FAQ)</h1>
         <p>Everything You Need to Know About Our Online Group Study Platform</p>

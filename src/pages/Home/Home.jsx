@@ -14,8 +14,8 @@ const Home = () => {
 
   return (
     <div
-      className={`transition-colors duration-300 ${
-        isDarkMode ? "bg-gray-900 text-white" : "bg-white text-black"
+      className={`transition-colors  space-y-16 duration-300 ${
+        isDarkMode ? "bg-gray-900 text-white" : "bg-blue-50 text-black"
       }`}
     >
       <Helmet>
