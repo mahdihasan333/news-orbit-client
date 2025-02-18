@@ -71,11 +71,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/subscription",
-        element: (
-          <PrivateRoute>
-            <Subscription />
-          </PrivateRoute>
-        ),
+        element: <Subscription />,
       },
 
       {
@@ -134,7 +130,7 @@ export const router = createBrowserRouter([
         path: "allUsers",
         element: (
           // <AdminRoute>
-            <AllUsers />
+          <AllUsers />
           // </AdminRoute>
         ),
       },

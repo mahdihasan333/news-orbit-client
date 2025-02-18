@@ -26,7 +26,7 @@ const MyArticles = () => {
         <link rel="icon" type="image/png" href="/fountain.png" />
       </Helmet>
 
-      <div className="p-6">
+      <div className="w-11/12 mx-auto mt-10">
         <h2 className="text-2xl font-bold mb-6">My Articles</h2>
         <div className="overflow-x-auto">
           <table className="table w-full">

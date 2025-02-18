@@ -3,7 +3,7 @@ import Sidebar from "../components/Dashboard/Sidebar/Sidebar";
 
 const DashboardLayout = () => {
   return (
-    <div className="w-11/12 mx-auto flex min-h-screen">
+    <div className="flex">
       {/* Sidebar Section */}
       <div className="w-64 bg-green-800 text-white min-h-full">
         <Sidebar />

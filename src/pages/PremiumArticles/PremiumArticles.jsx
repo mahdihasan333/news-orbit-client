@@ -1,5 +1,4 @@
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
@@ -22,11 +21,11 @@ const PremiumArticlesPage = () => {
   return (
     <>
       <Helmet>
-        <title>NewsOrbit || Premium Articles</title>
+        <title>NewsOrbit | Premium Articles</title>
         <link rel="icon" type="image/png" href="/star-icon.png" />
       </Helmet>
 
-      <section className="bg-gray-100 py-10">
+      <section className="w-11/12 mx-auto mt-16 py-10">
         <div className="container mx-auto text-center">
           <h2 className="text-3xl font-bold mb-6">Premium Articles</h2>
           <p className="text-gray-600 mb-8">

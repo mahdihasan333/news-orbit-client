@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+// import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import UserCard from "../../components/UserCard/UserCard";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { Helmet } from "react-helmet-async";
@@ -58,8 +58,8 @@ const AllArticles = () => {
         <link rel="icon" type="image/png" href="/page-icon.png" />
       </Helmet>
 
-      <div className="container mx-auto p-6">
-        <h1 className="text-3xl font-bold mb-6">All Articles</h1>
+      <div className="w-11/12 mt-24 mx-auto">
+        
 
         {/* Search and Filter */}
         <div className="flex flex-wrap gap-4 mb-6">

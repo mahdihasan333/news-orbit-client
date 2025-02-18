@@ -96,11 +96,11 @@ const AddArticles = () => {
   return (
     <>
       <Helmet>
-        <title>NewsOrbit || Add Articles</title>
+        <title>NewsOrbit | Add Articles</title>
         <link rel="icon" type="image/png" href="/pencil-icon.png" />
       </Helmet>
 
-      <div className="w-full px-1 md:w-8/12 mx-auto min-h-[calc(100vh-40px)] flex flex-col justify-center items-center text-gray-800 rounded-xl bg-gray-50">
+      <div className="w-11/12 mt-24 px-1 mx-auto flex flex-col justify-center items-center text-gray-800 rounded-xl bg-gray-50">
         <form className="w-full" onSubmit={handleSubmit}>
           <div className="flex flex-col w-full">
             {/* Article Title */}

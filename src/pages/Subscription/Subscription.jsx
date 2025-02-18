@@ -12,7 +12,7 @@ const Subscription = () => {
         <link rel="icon" type="image/png" href="/diamond-icon.png" />
       </Helmet>
 
-      <div className="p-6">
+      <div className="mt-16 w-11/12 mx-auto">
         {/* Attractive Banner */}
         <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white py-12 px-6 rounded-lg mb-8 shadow-lg">
           <h1 className="sm:text-2xl md:text-4xl font-bold mb-4">

@@ -111,7 +111,7 @@ const Navbar = () => {
               </button>
 
               {/* User Image and Dropdown Toggle */}
-              <Link to='/profile'>
+              <Link to='/myProfile'>
               <button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 className="flex items-center space-x-2 focus:outline-none"
