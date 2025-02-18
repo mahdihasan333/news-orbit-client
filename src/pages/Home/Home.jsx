@@ -1,4 +1,6 @@
 import { Helmet } from "react-helmet-async";
+import { useContext } from "react";
+import { ThemeContext } from "../../providers/ThemeProvider";
 import Testimonials from "../../components/Home/Testimonials/Testimonials";
 import Questions from "../../components/Home/Questions/Questions";
 import Banner from "../../components/Home/Banner/Banner";
@@ -8,8 +10,14 @@ import Statistic from "../../components/Home/Statistic/Statistic";
 import Modal from "../../components/Home/modal/Modal";
 
 const Home = () => {
+  const { isDarkMode } = useContext(ThemeContext);
+
   return (
-    <div>
+    <div
+      className={`transition-colors duration-300 ${
+        isDarkMode ? "bg-gray-900 text-white" : "bg-white text-black"
+      }`}
+    >
       <Helmet>
         <title>NewsOrbit || Home</title>
         <link rel="icon" type="image/png" href="/newspaper-icon.png" />

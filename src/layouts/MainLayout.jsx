@@ -7,7 +7,7 @@ const MainLayout = () => {
     <div className="bg-white">
         {/* navbar */}
         <Navbar/>
-      <div className="w-11/12 mx-auto pt-2 min-h-[calc(100vh-68px)]">
+      <div className="min-h-[calc(100vh-68px)]">
         {/* outlet */}
         <Outlet />
       </div>
