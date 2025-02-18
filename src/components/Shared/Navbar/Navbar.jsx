@@ -11,7 +11,7 @@ const Navbar = () => {
   const [isAdmin] = useAdmin();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -34,7 +34,7 @@ const Navbar = () => {
   // Handle logout and redirect
   const handleLogout = () => {
     logOut();
-    navigate("/"); 
+    navigate("/");
   };
 
   return (
@@ -111,19 +111,18 @@ const Navbar = () => {
               </button>
 
               {/* User Image and Dropdown Toggle */}
-              <Link to='/myProfile'>
-              <button
-                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="flex items-center space-x-2 focus:outline-none"
-              >
-                <img
-                  src={user?.photoURL}
-                  alt="User Avatar"
-                  className="w-10 h-10 rounded-full border border-white"
-                />
-              </button>
+              <Link to="/myProfile">
+                <button
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  className="flex items-center space-x-2 focus:outline-none"
+                >
+                  <img
+                    src={user?.photoURL}
+                    alt="User Avatar"
+                    className="w-10 h-10 rounded-full border border-white"
+                  />
+                </button>
               </Link>
-              
             </div>
           )}
         </div>
@@ -140,52 +139,96 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu */}
+      
       {isMobileMenuOpen && (
         <div className="lg:hidden bg-lime-500 dark:bg-gray-900 text-white py-4 px-6">
-          <ul className="space-y-4">
+          <ul className="space-y-3 flex flex-col items-center justify-center">
             <li>
-              <NavLink to="/">Home</NavLink>
+              <NavLink to="/" onClick={() => setIsMobileMenuOpen(false)}>
+                Home
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/allArticles">All Articles</NavLink>
+              <NavLink
+                to="/allArticles"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                All Articles
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/subscription">Subscription</NavLink>
+              <NavLink
+                to="/subscription"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Subscription
+              </NavLink>
             </li>
 
             {user && (
               <>
                 <li>
-                  <NavLink to="/addArticles">Add Articles</NavLink>
+                  <NavLink
+                    to="/addArticles"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Add Articles
+                  </NavLink>
                 </li>
                 {isAdmin && (
                   <li>
-                    <NavLink to="/dashboard">Dashboard</NavLink>
+                    <NavLink
+                      to="/dashboard"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Dashboard
+                    </NavLink>
                   </li>
                 )}
                 <li>
-                  <NavLink to="/myArticles">My Articles</NavLink>
+                  <NavLink
+                    to="/myArticles"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    My Articles
+                  </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/premiumArticles">Premium Articles</NavLink>
+                  <NavLink
+                    to="/premiumArticles"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Premium Articles
+                  </NavLink>
                 </li>
 
-                <li><button
-                  onClick={handleLogout}
-                  className="w-full text-left px-4 py-2 hover:bg-red-600 rounded"
-                >
-                  Logout
-                </button></li>
+                <li>
+                  <button
+                    onClick={() => {
+                      handleLogout();
+                      setIsMobileMenuOpen(false); // Logout এর পরও মেনু বন্ধ হবে
+                    }}
+                    className="w-full text-left px-4 py-2 bg-red-600 rounded"
+                  >
+                    Logout
+                  </button>
+                </li>
               </>
             )}
           </ul>
+
+         
+
           <div className="flex flex-col items-center space-y-4 mt-4">
             {!user && (
               <>
-                <NavLink to="/login">
+                <NavLink to="/login" onClick={() => setIsMobileMenuOpen(false)}>
                   <button className="btn btn-outline w-full">Login</button>
                 </NavLink>
-                <NavLink to="/signUp">
+                <NavLink
+                  to="/signUp"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
                   <button className="btn btn-primary w-full">Sign Up</button>
                 </NavLink>
               </>

@@ -8,6 +8,7 @@ import Publisher from "../../components/Home/Publisher/Publisher";
 import Plan from "../../components/Home/Plan/Plan";
 import Statistic from "../../components/Home/Statistic/Statistic";
 import Modal from "../../components/Home/modal/Modal";
+import Contact from "../../components/Contact/Contact";
 
 const Home = () => {
   const { isDarkMode } = useContext(ThemeContext);
@@ -29,6 +30,7 @@ const Home = () => {
       <Plan />
       <Testimonials />
       <Questions />
+      <Contact/>
     </div>
   );
 };

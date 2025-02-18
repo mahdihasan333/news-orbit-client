@@ -17,7 +17,9 @@ const AllArticles = () => {
   useEffect(() => {
     const fetchAllArticles = async () => {
       const { data } = await axiosPublic.get(
-        `${import.meta.env.VITE_API_URL}/approved-data?filter=${filter}&search=${search}&tag=${selectedTag}`
+        `${
+          import.meta.env.VITE_API_URL
+        }/approved-data?filter=${filter}&search=${search}&tag=${selectedTag}`
       );
       setData(data);
     };
@@ -78,51 +80,53 @@ const AllArticles = () => {
 
       <div className="w-11/12 pt-24 mx-auto transition duration-300 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white min-h-screen">
         {/* Dark Mode Toggle Button */}
-        
 
         {/* Search and Filter */}
-        <div className="flex flex-wrap gap-4 mb-6 bg-blue-50 dark:bg-gray-800 p-4 rounded-lg">
+        <div className="flex flex-col md:flex-row gap-4 mb-6 bg-blue-50 dark:bg-gray-800 p-4 w-full rounded-lg shadow-md">
           <input
             type="text"
             placeholder="Search by title"
-            className="p-2 border border-gray-400 dark:border-gray-600 rounded w-full md:w-1/2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+            className="p-3 border border-gray-400 dark:border-gray-600 rounded w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
             onChange={(e) => setSearch(e.target.value)}
             value={search}
           />
+
+          <div className="flex flex-col md:flex-row gap-4 w-full md:w-1/2">
+            <select
+              onChange={(e) => setFilter(e.target.value)}
+              value={filter}
+              className="p-3 border border-gray-400 dark:border-gray-600 rounded w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+            >
+              <option value="">All Publishers</option>
+              {Array.isArray(publisherData) &&
+                publisherData.map((item) => (
+                  <option key={item._id} value={item?.name}>
+                    {item?.name}
+                  </option>
+                ))}
+            </select>
+
+            <select
+              onChange={(e) => setSelectedTag(e.target.value)}
+              value={selectedTag}
+              className="p-3 border border-gray-400 dark:border-gray-600 rounded w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+            >
+              <option value="">All Tags</option>
+              {tags.map((tag) => (
+                <option key={tag.value} value={tag.value}>
+                  {tag.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
           <button className="px-4 py-2 text-sm font-medium uppercase bg-lime-500 dark:bg-lime-500 text-white rounded-md hover:bg-lime-600 dark:hover:bg-lime-500 transition">
             Search
           </button>
 
-          <select
-            onChange={(e) => setFilter(e.target.value)}
-            value={filter}
-            className="p-2 border border-gray-400 dark:border-gray-600 rounded w-full md:w-1/4 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-          >
-            <option value="">All Publishers</option>
-            {Array.isArray(publisherData) &&
-              publisherData.map((item) => (
-                <option key={item._id} value={item?.name}>
-                  {item?.name}
-                </option>
-              ))}
-          </select>
-
-          <select
-            onChange={(e) => setSelectedTag(e.target.value)}
-            value={selectedTag}
-            className="p-2 border border-gray-400 dark:border-gray-600 rounded w-full md:w-1/4 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-          >
-            <option value="">All Tags</option>
-            {tags.map((tag) => (
-              <option key={tag.value} value={tag.value}>
-                {tag.label}
-              </option>
-            ))}
-          </select>
-
           <button
             onClick={handleReset}
-            className="px-4 py-2 text-white bg-gray-500 dark:bg-gray-700 rounded-md hover:bg-gray-600 dark:hover:bg-gray-600 transition"
+            className="px-4 py-2 text-white bg-red-500 dark:bg-red-700 rounded-md hover:bg-red-600 dark:hover:bg-red-600 transition"
           >
             Reset
           </button>
