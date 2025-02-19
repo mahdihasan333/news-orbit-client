@@ -1,12 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import CountUp from "react-countup";
-import useAuth from "../../../hooks/useAuth";
 import { FaUsers, FaUserAlt, FaCrown } from 'react-icons/fa'; // Adding icons from react-icons
 
 const Statistic = () => {
   const axiosSecure = useAxiosSecure();
-  const { user } = useAuth();
+  
 
   const { data: statData = {} } = useQuery({
     queryKey: ["statData"],
@@ -35,7 +34,7 @@ const Statistic = () => {
           </div>
           <h3 className="text-xl font-semibold mb-3 text-center">Total Users</h3>
           <CountUp
-            start={0}
+            start={statData.premiumUsers || 0}
             end={statData.totalUsers || 0}
             duration={2}
             separator=","
@@ -49,7 +48,7 @@ const Statistic = () => {
           </div>
           <h3 className="text-xl font-semibold mb-3 text-center">Normal Users</h3>
           <CountUp
-            start={0}
+            start={statData.premiumUsers || 0}
             end={statData.normalUsers || 0}
             duration={2}
             separator=","
@@ -63,7 +62,7 @@ const Statistic = () => {
           </div>
           <h3 className="text-xl font-semibold mb-3 text-center">Premium Users</h3>
           <CountUp
-            start={0}
+            start={statData.premiumUsers || 0}
             end={statData.premiumUsers || 0}
             duration={2}
             separator=","

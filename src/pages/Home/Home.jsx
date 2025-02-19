@@ -6,10 +6,11 @@ import Questions from "../../components/Home/Questions/Questions";
 import Banner from "../../components/Home/Banner/Banner";
 import Publisher from "../../components/Home/Publisher/Publisher";
 import Plan from "../../components/Home/Plan/Plan";
-import Statistic from "../../components/Home/Statistic/Statistic";
+// import Statistic from "../../components/Home/Statistic/Statistic";
 import Modal from "../../components/Home/modal/Modal";
 import Contact from "../../components/Contact/Contact";
 import About from "../../components/About/About";
+import FeaturedCategories from "../../components/Home/FeaturedCategories/FeaturedCategories";
 
 const Home = () => {
   const { isDarkMode } = useContext(ThemeContext);
@@ -21,18 +22,20 @@ const Home = () => {
       }`}
     >
       <Helmet>
-        <title>NewsOrbit || Home</title>
+        <title>NewsOrbit | Home</title>
         <link rel="icon" type="image/png" href="/newspaper-icon.png" />
       </Helmet>
       <Modal />
       <Banner />
-      <About/>
+      <About />
       <Publisher />
-      <Statistic />
+      {/* <Statistic /> */}
       <Plan />
+      <FeaturedCategories/>
+      
       <Testimonials />
       <Questions />
-      <Contact/>
+      <Contact />
     </div>
   );
 };

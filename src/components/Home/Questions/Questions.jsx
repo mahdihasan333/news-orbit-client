@@ -53,7 +53,9 @@ const Questions = () => {
       }`}
     >
       <div className="text-center space-y-5 mb-12">
-        <h1 className="text-5xl font-extrabold">Frequently Asked Questions</h1>
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-center">
+          Frequently Asked Questions
+        </h1>
         <p className="text-lg text-gray-600 dark:text-gray-300">
           Find answers to the most common questions about our platform
         </p>

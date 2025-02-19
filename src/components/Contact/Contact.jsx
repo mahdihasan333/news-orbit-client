@@ -39,7 +39,7 @@ const Contact = () => {
             Feel free to reach out to me with any questions!
           </p>
 
-          <div className="mt-8 max-w-5xl mx-auto">
+          <div className="mt-8">
             <form
               onSubmit={handleSubmit}
               className={`p-6 rounded-lg shadow-lg transition-all duration-300 ${
