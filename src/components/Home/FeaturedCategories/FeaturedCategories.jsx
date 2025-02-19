@@ -4,10 +4,11 @@ import { ThemeContext } from "../../../providers/ThemeProvider";
 const categories = [
   { name: "Politics", image: "https://images.unsplash.com/photo-1573140247632-f8fd74997d5c", description: "Latest political news and updates." },
   { name: "Sports", image: "https://images.unsplash.com/photo-1517649763962-0c623066013b", description: "All about sports and tournaments." },
-  { name: "Entertainment", image: "https://images.unsplash.com/photo-1598899134739-24c36b3a6e2d", description: "Hollywood, Bollywood, and more." },
+  { name: "Entertainment", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxDin8yqPNHRJEswe8ogoUoF0XF9L-D5LzaA&s", description: "Hollywood, Bollywood, and more." },
   { name: "Technology", image: "https://images.unsplash.com/photo-1518770660439-4636190af475", description: "New gadgets, AI, and innovations." },
   { name: "Health", image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef", description: "Stay fit with health news." },
 ];
+
 
 const FeaturedCategories = () => {
   const [darkMode, setDarkMode] = useState(false);
