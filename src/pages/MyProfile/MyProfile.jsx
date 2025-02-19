@@ -1,13 +1,15 @@
 import { Helmet } from "react-helmet-async";
+import { useState, useContext } from "react";
+import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import { shortImageName } from "../../utilities";
-import { useState } from "react";
-import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { imageUpload } from "../../api/utils";
+import { ThemeContext } from "../../providers/ThemeProvider";
 
 const MyProfile = () => {
   const { user } = useAuth();
+  const { theme } = useContext(ThemeContext); // Dark/Light mode support
   const [uploadImage, setUploadImage] = useState({
     image: { name: "Upload Button" },
   });
@@ -26,15 +28,13 @@ const MyProfile = () => {
       imageUrl,
       email: user.email,
     };
-    
 
-    // sent data to server side
     try {
       await axiosSecure.patch("/update-user", updateUserData);
       Swal.fire({
         position: "top-end",
         icon: "success",
-        title: "user Data updated Successfully!!!",
+        title: "Profile updated successfully!",
         showConfirmButton: false,
         timer: 1500,
       });
@@ -52,107 +52,133 @@ const MyProfile = () => {
   return (
     <>
       <Helmet>
-        <title>NewsOrbit || User Profile</title>
+        <title>My Profile || Dashboard</title>
         <link rel="icon" type="image/png" href="/person.png" />
       </Helmet>
-      <div className="w-11/12 mx-auto mt-10">
-        <h2 className="text-2xl font-bold mb-6">My Profile</h2>
-        <div className="card bg-base-100 shadow-lg p-6">
-          {/* User Information */}
-          <div className="flex items-center space-x-6 mb-6">
-            <div className="avatar">
-              <div className="w-14 rounded-full">
-                <img src={user?.photoURL} alt="User Profile" />
-              </div>
+      <div
+        className={`max-w-6xl mx-auto mt-16 p-6 rounded-lg shadow-lg transition-colors duration-300 ${
+          theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black"
+        }`}
+      >
+        <h2 className="text-3xl font-bold text-center mb-6">My Profile</h2>
+
+        <div className="flex flex-col md:flex-row items-center gap-8">
+          {/* User Profile Image */}
+          <div className="flex flex-col items-center">
+            <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-lime-500 shadow-lg">
+              <img
+                className="w-full h-full object-cover"
+                src={uploadImage.url || user?.photoURL || "/default-avatar.png"}
+                alt="User Profile"
+              />
             </div>
-            <div className="flex flex-col flex-grow">
-              <h3 className="sm:text-xs md:text-xl font-semibold">
-                {user?.displayName}
-              </h3>
-              <p className="sm:text-xs text-gray-600">{user?.email}</p>
-            </div>
+            <h3 className="text-xl font-semibold mt-3">{user?.displayName}</h3>
+            <p className="text-gray-500">{user?.email}</p>
           </div>
-          <div className="divider"></div>
-          <div className="flex items-center justify-center text-3xl font-bold">
-            <h2>Update Information</h2>
-          </div>
-          <div className="divider"></div>
 
-          {/* Update Information Form */}
-          <form onSubmit={handleFormSubmit}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Name Input */}
-              <div>
-                <label
-                  className="block text-sm font-medium mb-2"
-                  htmlFor="name"
-                >
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  defaultValue={user?.displayName}
-                  className="input input-bordered w-full"
-                />
-              </div>
+          {/* Update Profile Form */}
+          <div className="flex-grow">
+            <h3 className="text-2xl font-bold mb-4 text-center md:text-left">
+              Update Information
+            </h3>
+            <form onSubmit={handleFormSubmit}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {/* Name Input */}
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    Full Name
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    defaultValue={user?.displayName}
+                    className={`input input-bordered w-full ${
+                      theme === "dark" ? "bg-gray-800 text-white" : ""
+                    }`}
+                    required
+                  />
+                </div>
 
-              {/* Email Input */}
-              <div>
-                <label
-                  className="block text-sm font-medium mb-2"
-                  htmlFor="email"
-                >
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  defaultValue={user.email}
-                  className="input input-bordered w-full"
-                  disabled
-                />
-              </div>
+                {/* Email Input */}
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    defaultValue={user.email}
+                    className="input input-bordered w-full bg-gray-200"
+                    disabled
+                  />
+                </div>
 
-              {/* Profile Picture Input */}
-              <div className="p-4 w-full m-auto rounded-lg flex-grow">
-                <div className="file_upload px-5 py-3 relative border-4 border-dotted border-gray-300 rounded-lg">
-                  <div className="flex flex-col w-max mx-auto text-center">
-                    <label>
-                      <input
-                        onChange={(e) =>
-                          setUploadImage({
-                            image: e.target.files[0],
-                            url: URL.createObjectURL(e.target.files[0]),
-                          })
-                        }
-                        className="text-sm cursor-pointer w-36 hidden"
-                        type="file"
-                        name="image"
-                        id="image"
-                        accept="image/*"
-                        required
-                      />
-                      <div className="bg-lime-500 text-white border border-gray-300 rounded font-semibold cursor-pointer p-1 px-3 hover:bg-lime-500">
+                {/* Profile Picture Upload */}
+                <div className="sm:col-span-2">
+                  <label className="block text-sm font-medium mb-2">
+                    Profile Picture
+                  </label>
+                  <div
+                    className={`file_upload px-4 py-3 border-2 border-dashed rounded-lg cursor-pointer transition-all ${
+                      theme === "dark" ? "border-gray-500" : "border-gray-300"
+                    }`}
+                  >
+                    <input
+                      onChange={(e) =>
+                        setUploadImage({
+                          image: e.target.files[0],
+                          url: URL.createObjectURL(e.target.files[0]),
+                        })
+                      }
+                      className="hidden"
+                      type="file"
+                      name="image"
+                      accept="image/*"
+                      id="image"
+                      required
+                    />
+                    <label
+                      htmlFor="image"
+                      className="flex justify-center items-center gap-2 cursor-pointer"
+                    >
+                      <span
+                        className={`px-4 py-2 rounded-lg font-semibold ${
+                          theme === "dark"
+                            ? "bg-lime-600 text-white"
+                            : "bg-lime-500"
+                        }`}
+                      >
                         {shortImageName(uploadImage?.image)}
-                      </div>
+                      </span>
                     </label>
                   </div>
                 </div>
+
+                {uploadImage?.url && (
+                  <div className="sm:col-span-2 flex flex-col items-center">
+                    <img
+                      className="w-24 h-24 rounded-full shadow-lg border-2 border-gray-300"
+                      src={uploadImage.url}
+                      alt="Preview"
+                    />
+                    <p className="text-sm text-gray-500">
+                      Image Size: {uploadImage?.image?.size} Bytes
+                    </p>
+                  </div>
+                )}
               </div>
 
-              {uploadImage && uploadImage?.image?.size && (
-                <div className="flex gap-5 items-center">
-                  <img className="w-20" src={uploadImage?.url} alt="" />
-                  <p>Image Size: {uploadImage?.image?.size} Bytes</p>
-                </div>
-              )}
-
-              <button className="btn bg-lime-500" type="submit">
-                update
+              <button
+                className={`btn w-full mt-6 text-lg font-semibold py-2 ${
+                  theme === "dark"
+                    ? "bg-lime-600 text-white hover:bg-lime-700"
+                    : "bg-lime-500 hover:bg-lime-600"
+                }`}
+                type="submit"
+              >
+                Update Profile
               </button>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </>

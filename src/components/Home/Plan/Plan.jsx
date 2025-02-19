@@ -47,7 +47,7 @@ const Plan = () => {
               </li>
             </ul>
             <Link to="/allArticles">
-              <button className="w-full py-2 px-4 rounded-md bg-indigo-600 text-white font-semibold text-lg hover:bg-indigo-700 transition-all duration-300">
+              <button className="w-full py-2 px-4 rounded-md bg-lime-500 text-white font-semibold text-lg hover:bg-lime-700 transition-all duration-300">
                 Get Started
               </button>
             </Link>

@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import  { useState, useContext } from "react";
 import { Helmet } from "react-helmet-async";
+import { ThemeContext } from '../../providers/ThemeProvider'
 
-const Contact = ({ isDarkMode }) => {
+const Contact = () => {
+  const { theme } = useContext(ThemeContext);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -17,9 +19,7 @@ const Contact = ({ isDarkMode }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic here (e.g., send to an API or email)
     console.log("Form submitted:", formData);
-    // Reset form after submission
     setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
   };
 
@@ -29,119 +29,82 @@ const Contact = ({ isDarkMode }) => {
         <title>Assignment Buddy | Contact</title>
       </Helmet>
       <section
-        className={`w-11/12 mx-auto ${
-          isDarkMode ? "bg-gray-900" : "bg-blue-50"
-        } text-white`}
+        className={`w-11/12 mx-auto transition-colors duration-300 ${
+          theme === "dark" ? "bg-gray-900 text-white" : "bg-blue-50 text-black"
+        }`}
       >
         <div className="container mx-auto text-center">
-          <h2 className="text-3xl font-bold text-black">Contact Me</h2>
-          <p className="mt-2 text-lg text-gray-400">
+          <h2 className="text-3xl font-bold">Contact Me</h2>
+          <p className="mt-2 text-lg text-gray-600 dark:text-gray-300">
             Feel free to reach out to me with any questions!
           </p>
 
-          {/* Contact Form */}
-          <div className="mt-8 max-w-3xl mx-auto">
+          <div className="mt-8 max-w-5xl mx-auto">
             <form
               onSubmit={handleSubmit}
-              className="bg-white p-6 rounded-lg shadow-lg"
+              className={`p-6 rounded-lg shadow-lg transition-all duration-300 ${
+                theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-black"
+              }`}
             >
-              <div className="flex flex-col md:flex-row gap-6">
-                {/* Name */}
-                <div className="flex flex-col w-full">
-                  <label
-                    htmlFor="name"
-                    className="text-gray-700 dark:text-black text-sm font-semibold mb-2"
-                  >
-                    Your Name
-                  </label>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="flex flex-col">
+                  <label className="text-sm font-semibold">Your Name</label>
                   <input
                     type="text"
-                    id="name"
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
-                    className="p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="p-3 rounded-lg border border-gray-300 bg-gray-50 dark:bg-gray-700 focus:ring-2 focus:ring-green-500"
                     required
                   />
                 </div>
-
-                {/* Email */}
-                <div className="flex flex-col w-full">
-                  <label
-                    htmlFor="email"
-                    className="text-gray-700 dark:text-black text-sm font-semibold mb-2"
-                  >
-                    Your Email
-                  </label>
+                <div className="flex flex-col">
+                  <label className="text-sm font-semibold">Your Email</label>
                   <input
                     type="email"
-                    id="email"
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="p-3 rounded-lg border border-gray-300 bg-gray-50 dark:bg-gray-700 focus:ring-2 focus:ring-green-500"
                     required
                   />
                 </div>
               </div>
 
-              <div className="flex flex-col md:flex-row gap-6 mt-6">
-                {/* Phone Number */}
-                <div className="flex flex-col w-full">
-                  <label
-                    htmlFor="phone"
-                    className="text-gray-700 dark:text-black text-sm font-semibold mb-2"
-                  >
-                    Your Phone Number
-                  </label>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                <div className="flex flex-col">
+                  <label className="text-sm font-semibold">Your Phone Number</label>
                   <input
                     type="text"
-                    id="phone"
                     name="phone"
                     value={formData.phone}
                     onChange={handleInputChange}
-                    className="p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="p-3 rounded-lg border border-gray-300 bg-gray-50 dark:bg-gray-700 focus:ring-2 focus:ring-green-500"
                   />
                 </div>
-
-                {/* Subject */}
-                <div className="flex flex-col w-full">
-                  <label
-                    htmlFor="subject"
-                    className="text-gray-700 dark:text-black text-sm font-semibold mb-2"
-                  >
-                    Subject
-                  </label>
+                <div className="flex flex-col">
+                  <label className="text-sm font-semibold">Subject</label>
                   <input
                     type="text"
-                    id="subject"
                     name="subject"
                     value={formData.subject}
                     onChange={handleInputChange}
-                    className="p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="p-3 rounded-lg border border-gray-300 bg-gray-50 dark:bg-gray-700 focus:ring-2 focus:ring-green-500"
                   />
                 </div>
               </div>
 
-              {/* Message */}
               <div className="flex flex-col mt-6">
-                <label
-                  htmlFor="message"
-                  className="text-gray-700 dark:text-black text-sm font-semibold mb-2"
-                >
-                  Your Message
-                </label>
+                <label className="text-sm font-semibold">Your Message</label>
                 <textarea
-                  id="message"
                   name="message"
                   value={formData.message}
                   onChange={handleInputChange}
-                  className="p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 h-40 resize-none"
+                  className="p-3 rounded-lg border border-gray-300 bg-gray-50 dark:bg-gray-700 focus:ring-2 focus:ring-green-500 h-40 resize-none"
                   required
                 />
               </div>
 
-              {/* Submit Button */}
               <div className="mt-6">
                 <button
                   type="submit"

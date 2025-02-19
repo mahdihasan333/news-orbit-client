@@ -53,7 +53,7 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <div className="hidden lg:flex">
-          <ul className="flex space-x-6">
+          <ul className="flex space-x-6 items-center">
             <li>
               <NavLink to="/">Home</NavLink>
             </li>
@@ -79,6 +79,10 @@ const Navbar = () => {
                 </li>
                 <li>
                   <NavLink to="/premiumArticles">Premium Articles</NavLink>
+                </li>
+
+                <li onClick={() => handleLogout()}>
+                  <button className="btn btn-ghost">Logout</button>
                 </li>
               </>
             )}
@@ -139,7 +143,7 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu */}
-      
+
       {isMobileMenuOpen && (
         <div className="lg:hidden bg-lime-500 dark:bg-gray-900 text-white py-4 px-6">
           <ul className="space-y-3 flex flex-col items-center justify-center">
@@ -216,8 +220,6 @@ const Navbar = () => {
               </>
             )}
           </ul>
-
-         
 
           <div className="flex flex-col items-center space-y-4 mt-4">
             {!user && (
