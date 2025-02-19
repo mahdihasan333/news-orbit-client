@@ -10,7 +10,7 @@ const Statistic = () => {
 
   const { data: statData = {} } = useQuery({
     queryKey: ["statData"],
-    enabled: !!user,
+    // enabled: !!user,
     queryFn: async () => {
       const res = await axiosSecure.get(`/admin-stat`);
       return res.data.totalUser;

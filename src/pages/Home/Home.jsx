@@ -9,6 +9,7 @@ import Plan from "../../components/Home/Plan/Plan";
 import Statistic from "../../components/Home/Statistic/Statistic";
 import Modal from "../../components/Home/modal/Modal";
 import Contact from "../../components/Contact/Contact";
+import About from "../../components/About/About";
 
 const Home = () => {
   const { isDarkMode } = useContext(ThemeContext);
@@ -25,6 +26,7 @@ const Home = () => {
       </Helmet>
       <Modal />
       <Banner />
+      <About/>
       <Publisher />
       <Statistic />
       <Plan />

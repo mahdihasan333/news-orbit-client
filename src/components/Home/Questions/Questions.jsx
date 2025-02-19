@@ -49,7 +49,7 @@ const Questions = () => {
   return (
     <div
       className={`w-11/12 mx-auto py-16 transition-colors duration-300 ${
-        theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black"
+        theme === "dark" ? "bg-gray-900 text-white" : "text-black"
       }`}
     >
       <div className="text-center space-y-5 mb-12">
